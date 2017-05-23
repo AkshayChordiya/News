@@ -13,7 +13,7 @@ It's an extremely simple app which uses [NewsAPI](https://newsapi.org/) to show 
 It uses Retrofit 2 to fetch the news from the API.
 
 ## Steps to run:
-- Go to [NewsAPI](https://newsapi.org/) and generate an API key (It takes 2 steps only!)
+- Go to [NewsAPI](https://newsapi.org/) and generate an API key (It's only 2 steps!)
 - Put the API key at the bottom of the `gradle.properties`
 `
 NEWS_API_KEY = "YOUR_API_KEY"
@@ -25,7 +25,7 @@ NEWS_API_KEY = "YOUR_API_KEY"
 
 ## Screenshots
 
-[<img alt="NewsApp Main Page" height="450px" src="https://raw.githubusercontent.com/AkshayChordiya/android-arch-news-sample/master/art/screen.png" />][1]
+<img alt="NewsApp Main Page" height="450px" src="https://raw.githubusercontent.com/AkshayChordiya/android-arch-news-sample/master/art/screen.png" />
 
 --------------------
 
@@ -39,7 +39,7 @@ NEWS_API_KEY = "YOUR_API_KEY"
 ## Built With
 
 * [Android Studio](https://developer.android.com/studio/index.html) - The Official IDE for Android
-* [Kotlin](https://kotlinlang.org/) - The "Swift" of Android
+* [Kotlin](https://kotlinlang.org/) - The Official Language for Android
 * [Gradle](https://gradle.org/) - Build tool for Android Studio
 
 ## Contributing
@@ -75,5 +75,3 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for contributions.
 <p align="center">
   <h3>Proudly :muscle: made in <b><a href="https://kotlinlang.org/">Kotlin</a></b></h3>
 </p>
-
-[2]: https://raw.githubusercontent.com/AkshayChordiya/android-arch-news-sample/master/art/screen.png
