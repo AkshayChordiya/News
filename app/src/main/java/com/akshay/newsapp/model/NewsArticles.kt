@@ -1,19 +1,22 @@
 package com.akshay.newsapp.model
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 /**
- * Model describing the news article details fetched from
- * Google News.
+ * News Article Model describing the article details
+ * fetched from news source.
  *
  * @author Akshay Chordiya
  * @since 5/23/2017.
  */
-class NewsArticles(
-        @SerializedName("author") var author: String = "",
+@Entity(tableName = "news_article")
+data class NewsArticles(
+        @PrimaryKey(autoGenerate = true) var id: Int = 0,
+        @SerializedName("author") var author: String? = null,
         @SerializedName("title") var title: String = "",
         @SerializedName("description") var description: String = "",
         @SerializedName("url") var url: String = "",
         @SerializedName("urlToImage") var urlToImage: String = "",
-        @SerializedName("publishedAt") var publishedAt: String = "") {
-}
+        @SerializedName("publishedAt") var publishedAt: String = "")

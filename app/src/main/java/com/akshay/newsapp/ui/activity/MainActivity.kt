@@ -5,10 +5,12 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import com.akshay.newsapp.R
 import com.akshay.newsapp.adapter.NewsArticlesAdapter
 import com.akshay.newsapp.model.NewsArticles
-import com.akshay.newsapp.ui.NewsArticleListViewModel
+import com.akshay.newsapp.model.Resource
+import com.akshay.newsapp.ui.NewsArticleViewModel
 import com.akshay.newsapp.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -28,7 +30,7 @@ class MainActivity : LifecycleActivity() {
         setContentView(R.layout.activity_main)
 
         // Get the ViewModel component
-        val newsArticleListViewModel = ViewModelProviders.of(this).get(NewsArticleListViewModel::class.java)
+        val newsArticleViewModel = ViewModelProviders.of(this).get(NewsArticleViewModel::class.java)
 
         // Setting up RecyclerView and adapter
         val adapter = NewsArticlesAdapter {
@@ -38,10 +40,12 @@ class MainActivity : LifecycleActivity() {
         news_list.layoutManager = LinearLayoutManager(this)
 
         // Observing for data change
-        newsArticleListViewModel.getNewsArticles().observe(this, Observer<List<NewsArticles>> { articles ->
-            if (articles != null) {
+        newsArticleViewModel.getNewsArticles().observe(this, Observer<Resource<List<NewsArticles>>> {
+            Log.d("Main", "Res = $it")
+            Log.d("Main", "Data = ${it?.data}")
+            it?.data?.apply {
                 // Update the UI as the data has changed
-                adapter.replaceItems(articles)
+                adapter.replaceItems(this)
                 adapter.notifyDataSetChanged()
             }
         })
