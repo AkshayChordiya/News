@@ -11,6 +11,7 @@ This is just sample app explaining few parts of the Architecture Guidelines writ
 ## What's the app about?
 It's an extremely simple app which uses [NewsAPI](https://newsapi.org/) to show the latest news from Google News.
 It uses Retrofit 2 to fetch the news from the API.
+The main aim of this sample app is show how to use the new [Architecture Guidelines](https://developer.android.com/topic/libraries/architecture/index.html) with Kotlin.
 
 ## Steps to run:
 - Go to [NewsAPI](https://newsapi.org/) and generate an API key (It's only 2 steps!)
@@ -46,6 +47,9 @@ NEWS_API_KEY = "YOUR_API_KEY"
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for contributions.
 
+<p align="center">
+  <h3>Proudly :muscle: made in <b><a href="https://kotlinlang.org/">Kotlin</a></b></h3>
+</p>
 
 ## License
 -------
@@ -71,7 +75,3 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for contributions.
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
-
-<p align="center">
-  <h3>Proudly :muscle: made in <b><a href="https://kotlinlang.org/">Kotlin</a></b></h3>
-</p>
