@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="card_elevation">6sp</dimen>
+    <dimen name="card_margin">8sp</dimen>
+    <dimen name="normal_padding">10sp</dimen>
+    <dimen name="textview_size_normal">14sp</dimen>
+    <dimen name="image_size">180sp</dimen>
+    <dimen name="textview_size_small">12sp</dimen>
+</resources>

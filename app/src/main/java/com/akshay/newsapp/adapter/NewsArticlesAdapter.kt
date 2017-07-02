@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import com.akshay.newsapp.R
 import com.akshay.newsapp.model.NewsArticles
 import com.akshay.newsapp.utils.inflate
-import kotlinx.android.synthetic.main.news_article_item.view.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import kotlinx.android.synthetic.main.list_item_new_feed.view.*
 
 /**
  * The News adapter to show the news in a list.
@@ -24,7 +26,7 @@ class NewsArticlesAdapter(val listener: (NewsArticles) -> Unit) : RecyclerView.A
     /**
      * Inflate the view
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NewsHolder(parent.inflate(R.layout.news_article_item))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NewsHolder(parent.inflate(R.layout.list_item_new_feed))
 
     /**
      * Bind the view with the data
@@ -45,10 +47,23 @@ class NewsArticlesAdapter(val listener: (NewsArticles) -> Unit) : RecyclerView.A
          * Binds the UI with the data and handles clicks
          */
         fun bind(newsArticle: NewsArticles, listener: (NewsArticles) -> Unit) = with(itemView) {
-            news_title.text = newsArticle.title
-            news_description.text = newsArticle.description
+            //news_title.text = newsArticle.title
+            //news_description.text = newsArticle.description
+            tvNewsItemTitle.text = newsArticle.title
+            tvNewsAuthor.text = newsArticle.author
+            //TODO: need to format date
+            //tvListItemDateTime.text = getFormattedDate(newsArticle.publishedAt)
+            tvListItemDateTime.text = newsArticle.publishedAt
+            Glide.with(context).load(newsArticle.urlToImage)
+                    .animate(android.R.anim.fade_in)
+                    .placeholder(R.mipmap.img_test_one)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .error(R.mipmap.img_test_one).into(ivNewsImage)
             setOnClickListener { listener(newsArticle) }
+
+
         }
+
     }
 
     /**
