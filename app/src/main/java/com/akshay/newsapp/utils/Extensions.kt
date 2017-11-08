@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import retrofit2.Retrofit
 
 /**
  * Extension functions
@@ -34,4 +35,11 @@ fun FragmentActivity.toast(text: String, duration: Int = Toast.LENGTH_SHORT) {
  */
 fun FragmentActivity.toast(@StringRes stringRes: Int, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, stringRes, duration).show()
+}
+
+/**
+ * Easy retrofit create service
+ */
+inline fun <reified T> Retrofit.create(): T {
+    return create(T::class.java)
 }
