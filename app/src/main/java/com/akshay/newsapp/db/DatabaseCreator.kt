@@ -13,18 +13,11 @@ import android.content.Context
 object DatabaseCreator {
 
     /**
-     * The database object
-     */
-    lateinit var database: NewsDatabase
-
-    /**
      * Create database instance when the singleton instance is created for the
      * first time.
-     * It overrides the invocation of the object
      */
-    operator fun invoke(context: Context): DatabaseCreator {
-        database = Room.databaseBuilder(context, NewsDatabase::class.java, "news-db").build()
-        return this
+    fun database(context: Context): NewsDatabase {
+        return Room.databaseBuilder(context, NewsDatabase::class.java, "news-db").build()
     }
 
 }

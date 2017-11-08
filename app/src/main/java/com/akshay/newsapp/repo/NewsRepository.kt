@@ -2,7 +2,6 @@ package com.akshay.newsapp.repo
 
 import android.arch.lifecycle.LiveData
 import com.akshay.newsapp.AppExecutors
-import com.akshay.newsapp.api.ApiResponse
 import com.akshay.newsapp.api.NewsSourceService
 import com.akshay.newsapp.db.NewsArticlesDao
 import com.akshay.newsapp.model.NewsArticles
@@ -24,21 +23,13 @@ class NewsRepository(val newsDao: NewsArticlesDao, val newsSourceService: NewsSo
      */
     fun getNewsArticles(): LiveData<Resource<List<NewsArticles>>> {
         return object : NetworkBoundResource<List<NewsArticles>, NewsSource>(appExecutors) {
-            override fun saveCallResult(item: NewsSource) {
-                newsDao.insertArticles(item.articles)
-            }
+            override fun saveCallResult(item: NewsSource) = newsDao.insertArticles(item.articles)
 
-            override fun shouldFetch(data: List<NewsArticles>?): Boolean {
-                return data == null || data.isEmpty()
-            }
+            override fun shouldFetch(data: List<NewsArticles>?) = true
 
-            override fun loadFromDb(): LiveData<List<NewsArticles>> {
-                return newsDao.getNewsArticles()
-            }
+            override fun loadFromDb() = newsDao.getNewsArticles()
 
-            override fun createCall(): LiveData<ApiResponse<NewsSource>> {
-                return newsSourceService.getNewsSource()
-            }
+            override fun createCall() = newsSourceService.getNewsSource()
         }.asLiveData()
     }
 

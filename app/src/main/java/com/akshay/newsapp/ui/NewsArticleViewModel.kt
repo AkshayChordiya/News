@@ -25,7 +25,7 @@ class NewsArticleViewModel(application: Application) : AndroidViewModel(applicat
     private var newsArticles: LiveData<Resource<List<NewsArticles>>>
 
     init {
-        val newsRepository = NewsRepository(DatabaseCreator(application).database.newsArticlesDao(), NewsSourceService.getNewsSourceService())
+        val newsRepository = NewsRepository(DatabaseCreator.database(application).newsArticlesDao(), NewsSourceService.getNewsSourceService())
         newsArticles = newsRepository.getNewsArticles()
     }
 
