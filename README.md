@@ -37,14 +37,33 @@ The app uses `ViewModel` to abstract the data from UI and `Repository` as single
 
 --------------------
 
+## Architecture Components Explained
+Trying to learn the new Architecture Components. I have wrote a series of articles to understand Android Architecture Components. Feel free to check it out to learn more.
+
+- [Introduction to Architecture Components](https://medium.com/@aky/introduction-to-android-architecture-components-22b8c84f0b9d)
+- [Exploring ViewModel Architecture component](https://medium.com/@aky/exploring-viewmodel-architecture-component-5d60828172f9)
+- [Exploring LiveData Architecture component](https://medium.com/@aky/exploring-livedata-architecture-component-f9375d3644ee)
+- [Exploring Room Architecture component](https://medium.com/@aky/exploring-room-architecture-component-6db807094241)
+
 ## Todo
-- Write article explaining the complete flow of application
+- ~~Write article explaining the complete flow of application~~
 - Create fork of repo showing integration with Dagger 2
-- Write test cases
+- Write test cases; (DONE for Room - DAO and Retrofit - WebService)
+
+## Testing
+The architecture components are highly testable. Following table shows how to test various parts of the app (cheatsheet for testing architecture component)
+
+|  Component |     Test     |        Mock        |
+|:----------:|:------------:|:------------------:|
+|     UI     |   Espresso   |      ViewModel     |
+|  ViewModel |     JUnit    |     Repository     |
+| Repository |     JUnit    | DAO and WebService |
+|     DAO    | Instrumented |          -         |
+| WebService | Instrumented |    MockWebServer   |
 
 ### Prerequisites
 
-- Android Studio 3.0 Canary 4
+- Android Studio 3.0
 - Android Device with USB Debugging Enabled
 
 
@@ -63,7 +82,6 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for contributions.
 </p>
 
 ## License
--------
 
     The MIT License (MIT)
     
