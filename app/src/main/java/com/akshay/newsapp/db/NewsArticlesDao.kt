@@ -16,7 +16,7 @@ interface NewsArticlesDao {
      * Insert articles into the database
      */
     @Insert
-    fun insertArticles(articles: List<NewsArticles>)
+    fun insertArticles(articles: List<NewsArticles>): List<Long>
 
     /**
      * Get all the articles from database

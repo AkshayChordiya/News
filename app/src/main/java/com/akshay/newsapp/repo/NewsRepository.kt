@@ -23,7 +23,9 @@ class NewsRepository(val newsDao: NewsArticlesDao, val newsSourceService: NewsSo
      */
     fun getNewsArticles(): LiveData<Resource<List<NewsArticles>>> {
         return object : NetworkBoundResource<List<NewsArticles>, NewsSource>(appExecutors) {
-            override fun saveCallResult(item: NewsSource) = newsDao.insertArticles(item.articles)
+            override fun saveCallResult(item: NewsSource) {
+                newsDao.insertArticles(item.articles)
+            }
 
             override fun shouldFetch(data: List<NewsArticles>?) = true
 
