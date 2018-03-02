@@ -5,6 +5,7 @@ During Google I/O 2017, Android Team announced [guidelines](https://developer.an
 This is just sample app explaining the new Architecture Guidelines written in **Kotlin**, YAY!
 
 ## Components Demonstrated
+- [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle.html)(Used by LiveData)
 - [Room](https://developer.android.com/topic/libraries/architecture/room.html)
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html)
 - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel.html)
@@ -37,13 +38,21 @@ The app uses `ViewModel` to abstract the data from UI and `Repository` as single
 
 --------------------
 
-## Architecture Components Explained
+## Learn Architecture Components
 Trying to learn the new Architecture Components. I have wrote a series of articles to understand Android Architecture Components. Feel free to check it out to learn more.
 
 - [Introduction to Architecture Components](https://medium.com/@aky/introduction-to-android-architecture-components-22b8c84f0b9d)
 - [Exploring ViewModel Architecture component](https://medium.com/@aky/exploring-viewmodel-architecture-component-5d60828172f9)
 - [Exploring LiveData Architecture component](https://medium.com/@aky/exploring-livedata-architecture-component-f9375d3644ee)
 - [Exploring Room Architecture component](https://medium.com/@aky/exploring-room-architecture-component-6db807094241)
+
+- [Building Modern Android Apps with Architecture Guidelines](https://medium.com/@aky/building-modern-apps-using-the-android-architecture-guidelines-3238fff96f14)
+
+### Extra - Caster.io Course and Podcast
+- [Android Architecture Components - A Deep Dive - Caster.io](https://caster.io/courses/android-architecture-components-deep-dive) 📺
+- [Android Architecture Components Podcast on Fragmented](http://fragmentedpodcast.com/episodes/115/) 🎤
+
+
 
 ## Todo
 - ~~Write article explaining the complete flow of application~~
