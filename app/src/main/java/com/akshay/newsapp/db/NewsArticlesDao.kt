@@ -9,6 +9,7 @@ import com.akshay.newsapp.model.NewsArticles
 /**
  * Abstracts access to the news database
  */
+//TODO: Use inheritance for code re-usability.
 @Dao
 interface NewsArticlesDao {
 

@@ -17,8 +17,9 @@
 package com.akshay.newsapp.utils;
 
 import android.arch.lifecycle.LiveData;
+import android.support.annotation.NonNull;
 
-import com.akshay.newsapp.api.ApiResponse;
+import com.akshay.newsapp.model.network.Resource;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
@@ -30,13 +31,13 @@ import retrofit2.Retrofit;
 public class LiveDataCallAdapterFactory extends CallAdapter.Factory {
 
     @Override
-    public CallAdapter<?, ?> get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
+    public CallAdapter<?, ?> get(@NonNull Type returnType, @NonNull Annotation[] annotations, @NonNull Retrofit retrofit) {
         if (getRawType(returnType) != LiveData.class) {
             return null;
         }
         Type observableType = getParameterUpperBound(0, (ParameterizedType) returnType);
         Class<?> rawObservableType = getRawType(observableType);
-        if (rawObservableType != ApiResponse.class) {
+        if (rawObservableType != Resource.class) {
             throw new IllegalArgumentException("type must be a resource");
         }
         if (!(observableType instanceof ParameterizedType)) {

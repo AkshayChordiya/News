@@ -14,7 +14,9 @@ import kotlinx.android.synthetic.main.news_article_item.view.*
  * @author Akshay Chordiya
  * @since 5/23/2017.
  */
-class NewsArticlesAdapter(val listener: (NewsArticles) -> Unit) : RecyclerView.Adapter<NewsArticlesAdapter.NewsHolder>() {
+class NewsArticlesAdapter(
+        private val listener: (NewsArticles) -> Unit
+) : RecyclerView.Adapter<NewsArticlesAdapter.NewsHolder>() {
 
     /**
      * List of news articles
@@ -56,5 +58,6 @@ class NewsArticlesAdapter(val listener: (NewsArticles) -> Unit) : RecyclerView.A
      */
     fun replaceItems(items: List<NewsArticles>) {
         newsArticles = items
+        notifyDataSetChanged()
     }
 }

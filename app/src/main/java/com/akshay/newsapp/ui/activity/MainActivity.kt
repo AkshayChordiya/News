@@ -1,16 +1,13 @@
 package com.akshay.newsapp.ui.activity
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import com.akshay.newsapp.R
 import com.akshay.newsapp.adapter.NewsArticlesAdapter
-import com.akshay.newsapp.model.NewsArticles
-import com.akshay.newsapp.model.Resource
 import com.akshay.newsapp.ui.NewsArticleViewModel
+import com.akshay.newsapp.utils.getViewModel
+import com.akshay.newsapp.utils.observe
 import com.akshay.newsapp.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,15 +19,14 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : AppCompatActivity() {
 
+    private val newsArticleViewModel by lazy { getViewModel<NewsArticleViewModel>() }
+
     /**
      * Starting point of the activity
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        // Get the ViewModel component
-        val newsArticleViewModel = ViewModelProviders.of(this).get(NewsArticleViewModel::class.java)
 
         // Setting up RecyclerView and adapter
         val adapter = NewsArticlesAdapter {
@@ -40,15 +36,13 @@ class MainActivity : AppCompatActivity() {
         news_list.layoutManager = LinearLayoutManager(this)
 
         // Observing for data change
-        newsArticleViewModel.getNewsArticles().observe(this, Observer<Resource<List<NewsArticles>>> {
-            Log.d("Main", "Res = $it")
-            Log.d("Main", "Data = ${it?.data}")
-            it?.data?.apply {
+        newsArticleViewModel.getNewsArticles().observe(this) {
+            it.data?.apply {
+                //TODO: Show loading or empty state with RecyclerView
                 // Update the UI as the data has changed
                 adapter.replaceItems(this)
-                adapter.notifyDataSetChanged()
             }
-        })
+        }
 
     }
 }
