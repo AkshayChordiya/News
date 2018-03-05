@@ -3,18 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-ext.android_support_version = '26.1.0'
-ext.arch_version = '1.0.0'
-ext.retrofit_version = '2.3.0'
-
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion Versions.compileSDK
+    buildToolsVersion Versions.buildTools
     defaultConfig {
         applicationId "com.akshay.newsapp"
-        minSdkVersion 15
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion Versions.minSDK
+        versionCode Versions.versionCode
+        versionName Versions.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "NEWS_API_KEY", NEWS_API_KEY)
         javaCompileOptions {
@@ -38,34 +34,34 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation Deps.kotlin
 
     // Support Libraries
-    implementation "com.android.support:appcompat-v7:$android_support_version"
-    implementation "com.android.support:recyclerview-v7:$android_support_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation Deps.appCompat
+    implementation Deps.recyclerView
+    implementation Deps.constraintLayout
 
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation Deps.retrofit
+    implementation Deps.retrofitGsonConverter
+    implementation Deps.gson
 
     // Architecture Components
-    implementation "android.arch.lifecycle:extensions:$arch_version"
-    implementation "android.arch.persistence.room:runtime:$arch_version"
-
-    kapt "android.arch.lifecycle:compiler:$arch_version"
-    kapt "android.arch.persistence.room:compiler:$arch_version"
+    implementation Deps.lifecycle
+    kapt Deps.lifecycleCompiler
+    implementation Deps.coreTesting
+    // Room
+    implementation Deps.room
+    kapt Deps.roomCompiler
+    implementation Deps.roomTesting
 
     // Testing
-    testImplementation 'junit:junit:4.12'
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.1'
-    // Arch
-    testImplementation "android.arch.core:core-testing:$arch_version"
+    testImplementation Deps.junit
+    debugImplementation Deps.debugDb
     // Retrofit
-    testImplementation "com.squareup.okhttp3:mockwebserver:3.8.1"
+    testImplementation Deps.mockWebServer
     // UI
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation(Deps.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 }
