@@ -61,7 +61,7 @@ object Deps {
     const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
 
     // Testing
-    const val junit = "junit:junit:{${Versions.junit}"
+    const val junit = "junit:junit:${Versions.junit}"
     const val espresso = "com.android.support.test.espresso:espresso-core:${Versions.espresso}"
     const val debugDb = "com.amitshekhar.android:debug-db:${Versions.debugDb}"
 
