@@ -25,6 +25,7 @@ object Versions {
     const val retrofit = "2.3.0"
     const val gson = "2.8.2"
     const val okHttp = "3.10.0"
+    const val glide = "4.6.1"
 
     // Testing
     const val junit = "4.12"
@@ -43,6 +44,7 @@ object Deps {
     // Support Library
     const val appCompat = "com.android.support:appcompat-v7:${Versions.support}"
     const val recyclerView = "com.android.support:recyclerview-v7:${Versions.support}"
+    const val cardView = "com.android.support:cardview-v7:${Versions.support}"
     const val constraintLayout = "com.android.support.constraint:constraint-layout:${Versions.constraintLayout}"
 
     // Architecture Components
@@ -59,6 +61,9 @@ object Deps {
     const val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
     const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
+
+    // Glide
+    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
 
     // Testing
     const val junit = "junit:junit:${Versions.junit}"

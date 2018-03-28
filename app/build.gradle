@@ -39,6 +39,7 @@ dependencies {
     // Support Libraries
     implementation Deps.appCompat
     implementation Deps.recyclerView
+    implementation Deps.cardView
     implementation Deps.constraintLayout
 
     // Retrofit
@@ -54,6 +55,9 @@ dependencies {
     implementation Deps.room
     kapt Deps.roomCompiler
     implementation Deps.roomTesting
+
+    // Glide
+    implementation Deps.glide
 
     // Testing
     testImplementation Deps.junit

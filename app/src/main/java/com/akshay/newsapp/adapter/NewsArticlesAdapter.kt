@@ -8,6 +8,7 @@ import com.akshay.newsapp.model.NewsArticles
 import com.akshay.newsapp.utils.inflate
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.list_item_new_feed.view.*
 
 /**
@@ -56,11 +57,13 @@ class NewsArticlesAdapter(
             //TODO: need to format date
             //tvListItemDateTime.text = getFormattedDate(newsArticle.publishedAt)
             tvListItemDateTime.text = newsArticle.publishedAt
-            Glide.with(context).load(newsArticle.urlToImage)
-                    .animate(android.R.anim.fade_in)
-                    .placeholder(R.mipmap.img_test_one)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .error(R.mipmap.img_test_one).into(ivNewsImage)
+            Glide.with(context)
+                    .load(newsArticle.urlToImage)
+                    .apply(RequestOptions()
+                            .placeholder(R.mipmap.img_test_one)
+                            .error(R.mipmap.img_test_one)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL))
+                    .into(ivNewsImage)
             setOnClickListener { listener(newsArticle) }
 
 
