@@ -1,0 +1,15 @@
+{
+  "status": "ok",
+  "source": "google-news",
+  "sortBy": "top",
+  "articles": [
+    {
+      "author": "Akshay",
+      "title": "Google Pixel 2",
+      "description": "Gift me Google Pixel 2 ;)",
+      "url": "http://store.google.com",
+      "urlToImage": "https://lh3.googleusercontent.com/fnyMWXMS_wWmgD_YLOBG7ns8JqyyjsB4FkAncTy4--tP0SI3ezixzgrDtrZQx6Wxtim500LxaLeLm93Xa-ThWQ=v1-rw-w900",
+      "publishedAt": "2017-10-04T08:07:00Z"
+    }
+  ]
+}
