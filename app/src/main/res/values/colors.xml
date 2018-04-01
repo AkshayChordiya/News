@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- Brand color -->
+    <color name="colorPrimary">#121258</color>
+    <color name="colorPrimaryDark">#0F0F4A</color>
+    <color name="colorAccent">#FFC039</color>
+
+    <!-- Other colors -->
     <color name="color_transparent">#33000000</color>
 </resources>
