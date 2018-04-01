@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardViewSearchResult"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/card_elevation"
@@ -19,6 +17,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/drawable_list_item">
 
+        <!-- News block -->
         <RelativeLayout
             android:id="@+id/relativeItemImage"
             android:layout_width="match_parent"
@@ -30,7 +29,7 @@
                 android:layout_height="@dimen/image_size"
                 android:contentDescription="@string/news_image"
                 android:scaleType="centerCrop"
-                tools:src="@mipmap/img_test_one" />
+                tools:src="@drawable/img_test_one" />
 
             <TextView
                 android:id="@+id/tvNewsAuthor"
@@ -38,15 +37,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:background="@color/color_transparent"
-                android:padding="@dimen/normal_padding"
                 android:maxLines="1"
+                android:padding="@dimen/normal_padding"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
-                 />
+                tools:text="ABC News" />
 
         </RelativeLayout>
 
+        <!-- News Title -->
         <TextView
             android:id="@+id/tvNewsItemTitle"
             android:layout_width="match_parent"
@@ -56,22 +56,21 @@
             android:padding="@dimen/normal_padding"
             android:textColor="@android:color/black"
             android:textSize="@dimen/textview_size_normal"
-             />
+            tools:text="Elon Musk says Tesla can't yet launch in India" />
 
+        <!-- Date - Time -->
         <TextView
             android:id="@+id/tvListItemDateTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvNewsItemTitle"
             android:layout_marginBottom="@dimen/normal_padding"
-            android:layout_marginLeft="@dimen/normal_padding"
             android:layout_marginStart="@dimen/normal_padding"
             android:maxLines="2"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/textview_size_small"
             tools:text="@string/str_test_date" />
-
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

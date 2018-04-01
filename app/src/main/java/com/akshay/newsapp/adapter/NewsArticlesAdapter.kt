@@ -9,7 +9,7 @@ import com.akshay.newsapp.utils.inflate
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.list_item_new_feed.view.*
+import kotlinx.android.synthetic.main.row_news_article.view.*
 
 /**
  * The News adapter to show the news in a list.
@@ -29,7 +29,7 @@ class NewsArticlesAdapter(
     /**
      * Inflate the view
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NewsHolder(parent.inflate(R.layout.list_item_new_feed))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NewsHolder(parent.inflate(R.layout.row_news_article))
 
     /**
      * Bind the view with the data
@@ -60,8 +60,8 @@ class NewsArticlesAdapter(
             Glide.with(context)
                     .load(newsArticle.urlToImage)
                     .apply(RequestOptions()
-                            .placeholder(R.mipmap.img_test_one)
-                            .error(R.mipmap.img_test_one)
+                            .placeholder(R.drawable.img_test_one)
+                            .error(R.drawable.img_test_one)
                             .diskCacheStrategy(DiskCacheStrategy.ALL))
                     .into(ivNewsImage)
             setOnClickListener { listener(newsArticle) }

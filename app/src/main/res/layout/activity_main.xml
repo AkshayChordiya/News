@@ -23,5 +23,5 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp"
-        tools:listitem="@layout/news_article_item" />
+        tools:listitem="@layout/row_news_article" />
 </android.support.constraint.ConstraintLayout>
