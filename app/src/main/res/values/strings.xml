@@ -6,4 +6,7 @@
     <string name="news_image_desc">News Image</string>
     <string name="news_image">news image</string>
     <string name="str_test_date">22/02/2017</string>
+
+    <!-- Empty -->
+    <string name="no_news">No News</string>
 </resources>

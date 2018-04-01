@@ -9,14 +9,14 @@
     tools:layout_editor_absoluteY="81dp">
 
 
-    <android.support.v7.widget.RecyclerView
+    <com.akshay.newsapp.widget.CompleteRecyclerView
         android:id="@+id/news_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -24,4 +24,13 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp"
         tools:listitem="@layout/row_news_article" />
+
+    <!-- Progress and empty views -->
+    <include
+        layout="@layout/progress_layout"
+        tools:visibility="invisible" />
+
+    <include
+        layout="@layout/empty_layout"
+        tools:visibility="invisible" />
 </android.support.constraint.ConstraintLayout>
