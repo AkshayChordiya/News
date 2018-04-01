@@ -29,6 +29,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    kapt {
+        mapDiagnosticLocations = true
+    }
 }
 
 dependencies {

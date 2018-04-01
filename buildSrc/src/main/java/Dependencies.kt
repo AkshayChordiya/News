@@ -4,20 +4,20 @@
 object Versions {
 
     // Build Config
-    const val minSDK = 15
+    const val minSDK = 17
     const val compileSDK = 26
     const val targetSDK = 27
     const val buildTools = "27.0.3"
 
     // App version
-    const val versionCode = 2
-    const val versionName = "2.8.0"
+    const val versionCode = 3
+    const val versionName = "2.8.5"
 
     // Plugins
     const val androidGradlePlugin = "3.0.1"
 
     // Dependencies
-    const val kotlin = "1.2.30"
+    const val kotlin = "1.2.31"
     const val support = "27.1.0"
     const val constraintLayout = "1.0.2"
     const val lifecycle = "1.1.0"
