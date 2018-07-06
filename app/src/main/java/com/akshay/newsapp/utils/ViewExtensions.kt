@@ -2,16 +2,14 @@ package com.akshay.newsapp.utils
 
 import android.content.Context
 import android.graphics.PorterDuff
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.content.ContextCompat
-import android.support.v7.content.res.AppCompatResources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 
 fun View.visible() {
     visibility = View.VISIBLE
@@ -26,12 +24,12 @@ fun View.gone() {
 }
 
 fun Context.getColorCompat(@ColorRes colorRes: Int) = ContextCompat.getColor(this, colorRes)
-fun Fragment.getColor(@ColorRes colorRes: Int) = ContextCompat.getColor(requireContext(), colorRes)
+fun androidx.fragment.app.Fragment.getColor(@ColorRes colorRes: Int) = ContextCompat.getColor(requireContext(), colorRes)
 
 /**
  * Easy toast function for Activity.
  */
-fun FragmentActivity.toast(text: String, duration: Int = Toast.LENGTH_SHORT) {
+fun androidx.fragment.app.FragmentActivity.toast(text: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, text, duration).show()
 }
 

@@ -1,7 +1,7 @@
 package com.akshay.newsapp.db
 
-import android.arch.persistence.room.Room
 import android.content.Context
+import androidx.room.Room
 
 /**
  * Singleton instance to build the database object only once as

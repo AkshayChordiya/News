@@ -1,7 +1,7 @@
 package com.akshay.newsapp.db
 
-import android.arch.persistence.room.Room
-import android.support.test.InstrumentationRegistry
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
 import org.junit.After
 import org.junit.Before
 

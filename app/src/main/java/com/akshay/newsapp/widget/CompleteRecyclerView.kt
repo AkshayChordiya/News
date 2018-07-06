@@ -1,14 +1,13 @@
 package com.akshay.newsapp.widget
 
 import android.content.Context
-import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.recyclerview.widget.RecyclerView
 import com.akshay.newsapp.R
 import com.akshay.newsapp.model.network.Status
 import com.akshay.newsapp.utils.gone
@@ -52,7 +51,7 @@ class CompleteRecyclerView @JvmOverloads constructor(
         }
     }
 
-    override fun setAdapter(adapter: RecyclerView.Adapter<*>?) {
+    override fun setAdapter(adapter: androidx.recyclerview.widget.RecyclerView.Adapter<*>?) {
         visible()
         val oldAdapter = getAdapter()
         oldAdapter?.unregisterAdapterDataObserver(mAdapterObserver)
@@ -63,7 +62,7 @@ class CompleteRecyclerView @JvmOverloads constructor(
 
     private fun refreshState() {
         if (adapter != null) {
-            val noItems = 0 == adapter.itemCount
+            val noItems = 0 == adapter?.itemCount
             if (noItems) {
                 mProgressView?.gone()
                 mEmptyView?.visible()
@@ -111,8 +110,8 @@ class CompleteRecyclerView @JvmOverloads constructor(
 
     override fun onMeasure(widthSpec: Int, heightSpec: Int) {
         super.onMeasure(widthSpec, heightSpec)
-        if (layoutManager is GridLayoutManager) {
-            val manager = layoutManager as GridLayoutManager
+        if (layoutManager is androidx.recyclerview.widget.GridLayoutManager) {
+            val manager = layoutManager as androidx.recyclerview.widget.GridLayoutManager
             if (columnWidth > 0) {
                 val spanCount = Math.max(1, measuredWidth / columnWidth)
                 manager.spanCount = spanCount
@@ -123,7 +122,7 @@ class CompleteRecyclerView @JvmOverloads constructor(
     /**
      * Observes for changes in the adapter and is triggered on change
      */
-    private val mAdapterObserver = object : RecyclerView.AdapterDataObserver() {
+    private val mAdapterObserver = object : androidx.recyclerview.widget.RecyclerView.AdapterDataObserver() {
         override fun onChanged() = refreshState()
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) = refreshState()
         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) = refreshState()

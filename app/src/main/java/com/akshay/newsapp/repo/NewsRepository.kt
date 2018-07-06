@@ -1,6 +1,6 @@
 package com.akshay.newsapp.repo
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.akshay.newsapp.AppExecutors
 import com.akshay.newsapp.api.NewsSourceService
 import com.akshay.newsapp.db.NewsArticlesDao

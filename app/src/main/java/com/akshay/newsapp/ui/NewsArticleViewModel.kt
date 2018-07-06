@@ -1,8 +1,8 @@
 package com.akshay.newsapp.ui
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import com.akshay.newsapp.api.NewsSourceService
 import com.akshay.newsapp.db.DatabaseCreator
 import com.akshay.newsapp.model.NewsArticles

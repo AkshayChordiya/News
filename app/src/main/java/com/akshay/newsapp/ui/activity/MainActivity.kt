@@ -1,8 +1,7 @@
 package com.akshay.newsapp.ui.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
 import com.akshay.newsapp.R
 import com.akshay.newsapp.adapter.NewsArticlesAdapter
 import com.akshay.newsapp.ui.NewsArticleViewModel
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             toast("Clicked on item")
         }
         news_list.adapter = adapter
-        news_list.layoutManager = LinearLayoutManager(this)
+        news_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
 
         // Observing for data change
         newsArticleViewModel.getNewsArticles().observe(this) {

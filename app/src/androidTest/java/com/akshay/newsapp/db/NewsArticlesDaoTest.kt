@@ -1,6 +1,6 @@
 package com.akshay.newsapp.db
 
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.runner.AndroidJUnit4
 import com.akshay.newsapp.model.NewsArticles
 import com.akshay.newsapp.utils.LiveDataTestUtil
 import com.akshay.newsapp.utils.TestDataUtils

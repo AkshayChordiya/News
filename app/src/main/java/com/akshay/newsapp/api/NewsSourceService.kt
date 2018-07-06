@@ -1,6 +1,6 @@
 package com.akshay.newsapp.api
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.akshay.newsapp.BuildConfig
 import com.akshay.newsapp.model.NewsSource
 import com.akshay.newsapp.model.network.Resource

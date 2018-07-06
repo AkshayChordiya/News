@@ -1,0 +1,104 @@
+ext {
+
+    // Plugins
+    androidGradlePlugin = '3.2.0-beta02'
+
+    // Versions
+    kotlinVersion = '1.2.51'
+    ankoVersion = '0.10.4'
+    supportVersion = '1.0.0-alpha1'
+    materialVersion = '1.0.0-alpha1'
+    lifecycleVersion = "2.0.0-alpha1"
+    roomVersion = "2.0.0-alpha1"
+    navVersion = "1.0.0-alpha02"
+    retrofitVersion = '2.3.0'
+    okHttpVersion = '3.10.0'
+
+    // Library
+
+    // UI Libraries
+    constraintLayoutVersion = '1.1.0'
+    glideVersion = "4.6.1"
+
+    // Testing
+    jUnitVersion = '4.12'
+    mockitoVersion = '2.8.9'
+    mockitoExtensionVersion = '1.5.0'
+    debugDbVersion = '1.0.1'
+    espressoVersion = '2.2.2'
+    testRunnerVersion = '1.0.1'
+
+    // Kotlin
+    kotlinLibraries = [
+            kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
+    ]
+
+    // Support Libraries
+    supportLibraries = [
+            appCompat              : "androidx.appcompat:appcompat:${supportVersion}",
+            cardView               : "androidx.cardview:cardview:${supportVersion}",
+            recyclerView           : "androidx.recyclerview:recyclerview:${supportVersion}",
+            constraintLayout       : "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
+            material               : "com.google.android.material:material:${materialVersion}",
+    ]
+
+    // Arch Components
+    archLibraries = [
+            // Lifecycle
+            lifecycle              : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
+            lifecycleCompiler      : "androidx.lifecycle:lifecycle-compiler:${lifecycleVersion}",
+
+            // Room
+            room                   : "androidx.room:room-runtime:${roomVersion}",
+            roomCompiler           : "androidx.room:room-compiler:${roomVersion}",
+
+            // Navigation
+            navUI                  : "android.arch.navigation:navigation-ui:${navVersion}",
+            navFragment            : "android.arch.navigation:navigation-fragment:${navVersion}",
+
+            // Testing
+            coreTesting            : "androidx.arch.core:core-testing:${lifecycleVersion}",
+            roomTesting            : "androidx.room:room-testing:${roomVersion}",
+            navTesting             : "android.arch.navigation:navigation-testing:${navVersion}",
+    ]
+
+    // Retrofit
+    retrofitLibraries = [
+            core                : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            gsonConverter       : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            okHttpLogger        : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            mockWebServer       : "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
+    ]
+
+    // Libraries
+    libraries = [
+    ]
+
+    uiLibraries = [
+            glide             : "com.github.bumptech.glide:glide:${glideVersion}",
+    ]
+
+    // Testing
+    testLibraries = [
+            // Unit Testing
+            junit             : "junit:junit:${jUnitVersion}",
+            testRunner        : "com.android.support.test:runner:${testRunnerVersion}",
+            // UI Testing
+            espresso          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+
+            // Mockito
+            // TIP: Mockito - inline opens all Kotlin classes for mocking
+            mockito           : "org.mockito:mockito-inline:${mockitoVersion}",
+            mockitoAll        : "org.mockito:mockito-all:1.10.19",
+            mockitoKotlin     : "com.nhaarman:mockito-kotlin-kt1.1:${mockitoExtensionVersion}",
+
+            debugDb           : "com.amitshekhar.android:debug-db:${debugDbVersion}",
+    ]
+
+    gradlePlugins = [
+            kotlin          : "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}",
+            android         : "com.android.tools.build:gradle:${androidGradlePlugin}",
+            navigation         : "android.arch.navigation:navigation-safe-args-gradle-plugin:${navVersion}",
+    ]
+
+}
