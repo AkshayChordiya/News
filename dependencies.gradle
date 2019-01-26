@@ -1,7 +1,7 @@
 ext {
 
     // Plugins
-    androidGradlePlugin = '3.2.0-beta02'
+    androidGradlePlugin = '3.2.1'
 
     // Versions
     kotlinVersion = '1.2.51'
