@@ -40,7 +40,7 @@ class NewsSourceServiceTest : BaseServiceTest() {
     @Throws(IOException::class, InterruptedException::class)
     fun getNewsSource() {
         enqueueResponse("news_source.json")
-        val newsSource = LiveDataTestUtil.getValue(service.getNewsSource()).body
+        val newsSource = LiveDataTestUtil.getValue(service.getNewsSource()).data
 
         // Dummy request
         mockWebServer.takeRequest()
