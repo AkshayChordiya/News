@@ -1,16 +1,17 @@
+final roomSchemaDir = "$projectDir/roomSchemas"
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion Versions.compileSDK
-    buildToolsVersion Versions.buildTools
+    compileSdkVersion androidCompileSdkVersion
     defaultConfig {
         applicationId "com.akshay.newsapp"
-        minSdkVersion Versions.minSDK
-        versionCode Versions.versionCode
-        versionName Versions.versionName
+        minSdkVersion androidMinSdkVersion
+        versionCode 3
+        versionName "2.8.5"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "NEWS_API_KEY", NEWS_API_KEY)
@@ -29,8 +30,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    kapt {
-        mapDiagnosticLocations = true
+}
+
+kapt {
+    mapDiagnosticLocations = true
+    arguments {
+        arg("room.schemaLocation", roomSchemaDir)
     }
 }
 
@@ -38,38 +43,39 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Kotlin
-    implementation Deps.kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
     // Support Libraries
-    implementation Deps.appCompat
-    implementation Deps.recyclerView
-    implementation Deps.cardView
-    implementation Deps.constraintLayout
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation "com.android.support:recyclerview-v7:$supportVersion"
+    implementation "com.android.support:cardview-v7:$supportVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
 
     // Retrofit
-    implementation Deps.retrofit
-    implementation Deps.retrofitGsonConverter
-    implementation Deps.gson
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 
-    // Architecture Components
-    implementation Deps.lifecycle
-    kapt Deps.lifecycleCompiler
-    implementation Deps.coreTesting
+    // Lifecycle (ViewModel + LiveData)
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
+    implementation "android.arch.core:core-testing:$lifecycleVersion"
+
     // Room
-    implementation Deps.room
-    kapt Deps.roomCompiler
-    implementation Deps.roomTesting
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
 
     // Glide
-    implementation Deps.glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
 
     // Testing
-    testImplementation Deps.junit
-    debugImplementation Deps.debugDb
-    // Retrofit
-    testImplementation Deps.mockWebServer
-    // UI
-    androidTestImplementation(Deps.espresso, {
+    testImplementation "junit:junit:$jUnitVersion"
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    // Debug
+    debugImplementation "com.amitshekhar.android:debug-db:$debugDbVersion"
 }
