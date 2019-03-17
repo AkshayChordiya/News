@@ -17,7 +17,8 @@ The main aim of this sample app is show how to use the new [Architecture Guideli
 
 ## Steps to run:
 - Go to [NewsAPI](https://newsapi.org/) and generate an API key (It's only 2 steps!)
-- Put the API key at the bottom of the `gradle.properties`
+- Create new file -> `credentials.properties`
+- Add the API key as shown below:
 `
 NEWS_API_KEY = "YOUR_API_KEY"
 `

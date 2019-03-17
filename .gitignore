@@ -6,4 +6,4 @@
 /build
 /captures
 .externalNativeBuild
-gradle.properties
+credentials.properties

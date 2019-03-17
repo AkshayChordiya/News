@@ -61,8 +61,8 @@ class CompleteRecyclerView @JvmOverloads constructor(
     }
 
     private fun refreshState() {
-        if (adapter != null) {
-            val noItems = 0 == adapter?.itemCount
+        adapter?.let {
+            val noItems = 0 == it.itemCount
             if (noItems) {
                 mProgressView?.gone()
                 mEmptyView?.visible()

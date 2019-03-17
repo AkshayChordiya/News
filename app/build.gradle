@@ -1,25 +1,25 @@
+final roomSchemaDir = "$projectDir/roomSchemas"
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs"
+
+// Read credentials
+def credentialFile = rootProject.file("credentials.properties")
+def credentialProperty = new Properties()
+credentialProperty.load(new FileInputStream(credentialFile))
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion androidCompileSdkVersion
     defaultConfig {
         applicationId "com.akshay.newsapp"
-        minSdkVersion 15
+        minSdkVersion androidMinSdkVersion
         versionCode 3
         versionName "2.8.5"
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "NEWS_API_KEY", NEWS_API_KEY)
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "NEWS_API_KEY", credentialProperty['NEWS_API_KEY'])
     }
     buildTypes {
         debug {
@@ -30,53 +30,52 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    kapt {
-        mapDiagnosticLocations = true
+}
+
+kapt {
+    mapDiagnosticLocations = true
+    arguments {
+        arg("room.schemaLocation", roomSchemaDir)
     }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Kotlin
-    implementation kotlinLibraries.kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
     // Support Libraries
-    implementation supportLibraries.appCompat
-    implementation supportLibraries.recyclerView
-    implementation supportLibraries.cardView
-    implementation supportLibraries.constraintLayout
-    implementation supportLibraries.material
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation "com.android.support:recyclerview-v7:$supportVersion"
+    implementation "com.android.support:cardview-v7:$supportVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
 
     // Retrofit
-    implementation retrofitLibraries.core
-    implementation retrofitLibraries.gsonConverter
-    implementation retrofitLibraries.okHttpLogger
-    testImplementation retrofitLibraries.mockWebServer
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 
-    // Architecture Components
-    implementation archLibraries.lifecycle
-    kapt archLibraries.lifecycleCompiler
-    implementation archLibraries.coreTesting
+    // Lifecycle (ViewModel + LiveData)
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
+    implementation "android.arch.core:core-testing:$lifecycleVersion"
 
     // Room
-    implementation archLibraries.room
-    kapt archLibraries.roomCompiler
-    testImplementation archLibraries.roomTesting
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
 
-    // Navigation
-    implementation archLibraries.navUI
-    implementation archLibraries.navFragment
-    androidTestImplementation archLibraries.navTesting
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
 
-    // UI
-    implementation uiLibraries.glide
     // Testing
-    testImplementation testLibraries.junit
-    debugImplementation testLibraries.debugDb
-    androidTestImplementation testLibraries.testRunner
-    // UI
-    androidTestImplementation(testLibraries.espresso, {
+    testImplementation "junit:junit:$jUnitVersion"
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    // Debug
+    debugImplementation "com.amitshekhar.android:debug-db:$debugDbVersion"
 }
