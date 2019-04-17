@@ -1,10 +1,7 @@
 package com.akshay.newsapp.ui
 
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
-import com.akshay.newsapp.api.NewsSourceService
-import com.akshay.newsapp.db.DatabaseCreator
+import android.arch.lifecycle.ViewModel
 import com.akshay.newsapp.model.NewsArticles
 import com.akshay.newsapp.model.network.Resource
 import com.akshay.newsapp.repo.NewsRepository
@@ -12,18 +9,9 @@ import com.akshay.newsapp.repo.NewsRepository
 /**
  * A container for [NewsArticles] related data to show on the UI.
  */
-class NewsArticleViewModel(application: Application) : AndroidViewModel(application) {
+class NewsArticleViewModel(newsRepository: NewsRepository) : ViewModel() {
 
-    private var newsArticles: LiveData<Resource<List<NewsArticles>?>>
-
-    init {
-        // TODO: Inject repository using DI.
-        val newsRepository = NewsRepository(
-                DatabaseCreator.database(application).newsArticlesDao(),
-                NewsSourceService.getNewsSourceService()
-        )
-        newsArticles = newsRepository.getNewsArticles()
-    }
+    private var newsArticles: LiveData<Resource<List<NewsArticles>?>> = newsRepository.getNewsArticles()
 
     /**
      * Return news articles to observe on the UI.

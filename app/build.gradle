@@ -70,6 +70,15 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
+    // Dagger core
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    //Dagger Android
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
     // Testing
     testImplementation "junit:junit:$jUnitVersion"
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion", {

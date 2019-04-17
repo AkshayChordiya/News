@@ -9,7 +9,7 @@ import com.akshay.newsapp.model.NewsArticles
  * @author Akshay Chordiya
  * @since 6/5/2017.
  */
-@Database(entities = arrayOf(NewsArticles::class), version = 1)
+@Database(entities = [NewsArticles::class], version = 1)
 abstract class NewsDatabase : RoomDatabase() {
 
     /**

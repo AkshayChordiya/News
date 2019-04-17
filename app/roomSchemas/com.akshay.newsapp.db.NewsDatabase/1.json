@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e1ee4fd22065af061d56a67d00debac5",
+    "identityHash": "cd4637a6bf348ca0ced8a0460381170d",
     "entities": [
       {
         "tableName": "news_article",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `author` TEXT, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `url` TEXT NOT NULL, `urlToImage` TEXT, `publishedAt` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `author` TEXT, `title` TEXT, `description` TEXT, `url` TEXT, `urlToImage` TEXT, `publishedAt` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -24,19 +24,19 @@
             "fieldPath": "title",
             "columnName": "title",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "description",
             "columnName": "description",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "url",
             "columnName": "url",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "urlToImage",
@@ -63,7 +63,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e1ee4fd22065af061d56a67d00debac5\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"cd4637a6bf348ca0ced8a0460381170d\")"
     ]
   }
 }
