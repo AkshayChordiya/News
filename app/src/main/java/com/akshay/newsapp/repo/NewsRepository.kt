@@ -7,6 +7,8 @@ import com.akshay.newsapp.db.NewsArticlesDao
 import com.akshay.newsapp.model.NewsArticles
 import com.akshay.newsapp.model.NewsSource
 import com.akshay.newsapp.model.network.Resource
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Repository abstracts the logic of fetching the data and persisting it for
@@ -15,7 +17,9 @@ import com.akshay.newsapp.model.network.Resource
  * @author Akshay Chordiya
  * @since 6/5/2017.
  */
-class NewsRepository(
+
+@Singleton
+class NewsRepository @Inject constructor(
         private val newsDao: NewsArticlesDao,
         private val newsSourceService: NewsSourceService,
         private val appExecutors: AppExecutors = AppExecutors()
