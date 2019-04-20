@@ -1,11 +1,11 @@
 package com.akshay.newsapp.ui.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.akshay.newsapp.R
 import com.akshay.newsapp.adapter.NewsArticlesAdapter
 import com.akshay.newsapp.ui.NewsArticleViewModel
+import com.akshay.newsapp.ui.base.BaseActivity
 import com.akshay.newsapp.utils.getViewModel
 import com.akshay.newsapp.utils.load
 import com.akshay.newsapp.utils.observe
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.progress_layout.*
  * @author Akshay Chordiya
  * @since 5/23/2017.
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val newsArticleViewModel by lazy { getViewModel<NewsArticleViewModel>() }
 
