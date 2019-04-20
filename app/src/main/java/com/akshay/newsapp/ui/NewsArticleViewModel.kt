@@ -5,11 +5,14 @@ import android.arch.lifecycle.ViewModel
 import com.akshay.newsapp.model.NewsArticles
 import com.akshay.newsapp.model.network.Resource
 import com.akshay.newsapp.repo.NewsRepository
+import javax.inject.Inject
 
 /**
  * A container for [NewsArticles] related data to show on the UI.
  */
-class NewsArticleViewModel(newsRepository: NewsRepository) : ViewModel() {
+class NewsArticleViewModel @Inject constructor(
+        newsRepository: NewsRepository
+) : ViewModel() {
 
     private var newsArticles: LiveData<Resource<List<NewsArticles>?>> = newsRepository.getNewsArticles()
 
