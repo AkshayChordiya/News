@@ -2,7 +2,7 @@ package com.akshay.newsapp
 
 import android.app.Activity
 import android.app.Application
-import com.akshay.newsapp.di.AppInjector
+import com.akshay.newsapp.di.base.AppInjector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.akshay.newsapp.di
+package com.akshay.newsapp.di.base
 
 import android.arch.lifecycle.ViewModel
 import dagger.MapKey
