@@ -1,7 +1,7 @@
 package com.akshay.newsapp.di
 
 import android.app.Application
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import com.akshay.newsapp.api.NewsSourceService
 import com.akshay.newsapp.db.NewsArticlesDao
 import com.akshay.newsapp.db.NewsDatabase

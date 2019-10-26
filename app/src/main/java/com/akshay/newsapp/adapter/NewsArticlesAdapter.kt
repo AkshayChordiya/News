@@ -1,8 +1,8 @@
 package com.akshay.newsapp.adapter
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.akshay.newsapp.R
 import com.akshay.newsapp.model.NewsArticles
 import com.akshay.newsapp.utils.inflate

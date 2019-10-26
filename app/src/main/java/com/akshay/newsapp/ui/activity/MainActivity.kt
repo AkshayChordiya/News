@@ -1,7 +1,7 @@
 package com.akshay.newsapp.ui.activity
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.akshay.newsapp.R
 import com.akshay.newsapp.adapter.NewsArticlesAdapter
 import com.akshay.newsapp.ui.NewsArticleViewModel

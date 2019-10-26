@@ -1,8 +1,8 @@
 package com.akshay.newsapp.utils
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.akshay.newsapp.model.network.Resource
 import com.akshay.newsapp.widget.CompleteRecyclerView
 

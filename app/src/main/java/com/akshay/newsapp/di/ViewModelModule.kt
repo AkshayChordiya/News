@@ -1,7 +1,7 @@
 package com.akshay.newsapp.di
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.akshay.newsapp.di.base.ViewModelFactory
 import com.akshay.newsapp.di.base.ViewModelKey
 import com.akshay.newsapp.ui.NewsArticleViewModel

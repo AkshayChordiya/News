@@ -17,7 +17,7 @@
 package com.akshay.newsapp.utils
 
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.akshay.newsapp.model.network.Resource
 import retrofit2.Call
 import retrofit2.CallAdapter

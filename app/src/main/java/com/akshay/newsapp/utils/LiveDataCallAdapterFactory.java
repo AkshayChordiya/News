@@ -16,8 +16,8 @@
 
 package com.akshay.newsapp.utils;
 
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 
 import com.akshay.newsapp.model.network.Resource;
 
