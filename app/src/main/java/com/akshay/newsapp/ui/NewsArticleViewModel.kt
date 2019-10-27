@@ -2,6 +2,7 @@ package com.akshay.newsapp.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.akshay.newsapp.model.NewsArticles
 import com.akshay.newsapp.model.network.Resource
 import com.akshay.newsapp.repo.NewsRepository
@@ -14,10 +15,10 @@ class NewsArticleViewModel @Inject constructor(
         newsRepository: NewsRepository
 ) : ViewModel() {
 
-    private var newsArticles: LiveData<Resource<List<NewsArticles>?>> = newsRepository.getNewsArticles()
+    private val newsArticles: LiveData<Resource<List<NewsArticles>>> = newsRepository.getNewsArticles().asLiveData()
 
     /**
      * Return news articles to observe on the UI.
      */
-    fun getNewsArticles() = newsArticles
+    fun getNewsArticles(): LiveData<Resource<List<NewsArticles>>> = newsArticles
 }

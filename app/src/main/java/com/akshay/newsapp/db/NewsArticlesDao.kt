@@ -1,6 +1,5 @@
 package com.akshay.newsapp.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -23,5 +22,5 @@ interface NewsArticlesDao {
      * Get all the articles from database
      */
     @Query("SELECT * FROM news_article")
-    fun getNewsArticles(): LiveData<List<NewsArticles>>
+    suspend fun getNewsArticles(): List<NewsArticles>
 }
