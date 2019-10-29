@@ -35,6 +35,7 @@ buildscript {
 
     // Testing
     ext.jUnitVersion = '4.12'
+    ext.androidjUnitVersion = '1.1.1'
     ext.mockitoVersion = '2.8.9'
     ext.mockitoExtensionVersion = '1.5.0'
     ext.espressoVersion = '3.1.0'

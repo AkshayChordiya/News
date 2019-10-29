@@ -1,50 +1,55 @@
 package com.akshay.newsapp.db
 
+import android.content.Context
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.akshay.newsapp.model.NewsArticles
-import com.akshay.newsapp.utils.LiveDataTestUtil
-import com.akshay.newsapp.utils.TestDataUtils
-import org.hamcrest.CoreMatchers.`is`
+import kotlinx.coroutines.runBlocking
+import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/**
- *
- * @author Akshay Chordiya
- * @since 08/11/2017.
- * @version 1.0
- */
 @RunWith(AndroidJUnit4::class)
-class NewsArticlesDaoTest : DbTest() {
+class NewsArticlesDaoTest {
+
+    private lateinit var db: NewsDatabase
+
+    @Before
+    fun initDb() {
+        db = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext<Context>(), NewsDatabase::class.java).build()
+    }
+
+    @After
+    fun closeDb() = db.close()
 
     @Test
     @Throws(InterruptedException::class)
     fun insertNewsArticles() {
-        val articles = TestDataUtils.createNewsArticles(NewsArticles(1), NewsArticles(2))
-        assertThat(db.newsArticlesDao().insertArticles(articles), `is`(listOf(1L, 2L)))
+        // GIVEN
+        val input = listOf(NewsArticles(1), NewsArticles(2))
+
+        // THEN
+        assertThat(db.newsArticlesDao().insertArticles(input), equalTo(listOf(1L, 2L)))
     }
 
     @Test
     @Throws(InterruptedException::class)
-    fun insertNewsArticlesAndRead() {
-        val feeds = TestDataUtils.createNewsArticles(
+    fun insertNewsArticlesAndRead(): Unit = runBlocking {
+        // GIVEN
+        val input = listOf(
                 NewsArticles(1, "First", "Hello"),
                 NewsArticles(2, "Second", "Testing")
         )
-        db.newsArticlesDao().insertArticles(feeds)
-        val loaded = LiveDataTestUtil.getValue(db.newsArticlesDao().getNewsArticles())
-        assertThat(loaded.size, `is`(2))
+        db.newsArticlesDao().insertArticles(input)
 
-        // 1st
-        val first = loaded[0]
-        assertThat(first.author, `is`("First"))
-        assertThat(first.title, `is`("Hello"))
-
-        // 2nd
-        val second = loaded[1]
-        assertThat(second.author, `is`("Second"))
-        assertThat(second.title, `is`("Testing"))
+        // THEN
+        val articles = db.newsArticlesDao().getNewsArticles()
+        assertThat(articles.size, equalTo(articles.size))
+        assertThat(articles, equalTo(articles))
     }
 
 }

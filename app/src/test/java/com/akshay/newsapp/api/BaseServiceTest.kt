@@ -13,11 +13,6 @@ import java.io.IOException
 import java.nio.charset.StandardCharsets
 import java.util.*
 
-/**
- * @author Akshay Chordiya
- * @since 08/11/2017.
- * @version 1.0
- */
 @RunWith(JUnit4::class)
 abstract class BaseServiceTest {
 
@@ -46,7 +41,7 @@ abstract class BaseServiceTest {
     @Throws(IOException::class)
     fun enqueueResponse(fileName: String, headers: Map<String, String>) {
         val inputStream = javaClass.classLoader
-                .getResourceAsStream("api-response/" + fileName)
+                ?.getResourceAsStream("api-response/$fileName")
         val source = Okio.buffer(Okio.source(inputStream))
         val mockResponse = MockResponse()
         for ((key, value) in headers) {

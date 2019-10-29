@@ -1,8 +1,8 @@
 package com.akshay.newsapp.api
 
 import com.akshay.newsapp.utils.LiveDataCallAdapterFactory
-import com.akshay.newsapp.utils.LiveDataTestUtil
 import com.akshay.newsapp.utils.create
+import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
@@ -14,12 +14,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
-/**
- *
- * @author Akshay
- * @since 08/11/2017.
- * @version 1.0
- */
 @RunWith(JUnit4::class)
 class NewsSourceServiceTest : BaseServiceTest() {
 
@@ -38,30 +32,28 @@ class NewsSourceServiceTest : BaseServiceTest() {
 
     @Test
     @Throws(IOException::class, InterruptedException::class)
-    fun getNewsSource() {
+    fun getNewsSource() = runBlocking {
         enqueueResponse("news_source.json")
-        val newsSource = LiveDataTestUtil.getValue(service.getNewsSource()).data
+        val newsSource = service.getNewsSource()
 
         // Dummy request
         mockWebServer.takeRequest()
 
         // Check news source
         assertThat(newsSource, notNullValue())
-        assertThat(newsSource?.source, `is`("google-news"))
-        assertThat(newsSource?.sortBy, `is`("top"))
-        assertThat(newsSource?.status, `is`("ok"))
+        assertThat(newsSource.source, `is`("google-news"))
+        assertThat(newsSource.sortBy, `is`("top"))
+        assertThat(newsSource.status, `is`("ok"))
 
         // Check list
-        val articles = newsSource?.articles
+        val articles = newsSource.articles
         assertThat(articles, notNullValue())
 
         // Check item 1
-        val article1 = articles?.get(0)
+        val article1 = articles[0]
         assertThat(article1, notNullValue())
-        if (article1 != null) {
-            assertThat(article1.author, `is`("Akshay"))
-            assertThat(article1.title, `is`("Google Pixel 2"))
-            assertThat(article1.description, `is`("Gift me Google Pixel 2 ;)"))
-        }
+        assertThat(article1.author, `is`("Akshay"))
+        assertThat(article1.title, `is`("Google Pixel 2"))
+        assertThat(article1.description, `is`("Gift me Google Pixel 2 ;)"))
     }
 }
