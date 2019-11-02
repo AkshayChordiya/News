@@ -14,7 +14,7 @@ The codebase focuses 👓 on following key things:
 The idea is to keep the app super simple while demonstrating new libraries and tools which makes it easier to build high quality Android applications.
 
 
-<img alt="NewsApp Main Page" height="450px" src="https://raw.githubusercontent.com/AkshayChordiya/android-arch-news-sample/master/art/screen.png" />
+<img alt="NewsApp Main Page" height="450px" src="https://raw.githubusercontent.com/AkshayChordiya/News/master/art/screen.png" />
 
 # Development Setup 🖥
 
