@@ -1,26 +1,26 @@
 package com.akshay.newsapp.ui.base
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
 // Easy to switch base activity in future
 typealias BaseActivity = DaggerActivity
 
 /**
- * Activity providing Dagger support and [ViewModel] support
+ * Base activity providing Dagger support and [ViewModel] support
  */
-abstract class DaggerActivity : AppCompatActivity(), HasSupportFragmentInjector {
+abstract class DaggerActivity : AppCompatActivity(), HasAndroidInjector {
 
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<androidx.fragment.app.Fragment>
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override fun supportFragmentInjector() = dispatchingAndroidInjector
-
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 }

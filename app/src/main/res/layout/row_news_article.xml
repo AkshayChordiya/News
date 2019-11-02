@@ -2,14 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/NewsArticle.View"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/card_elevation"
-    android:layout_marginEnd="@dimen/card_margin"
-    android:layout_marginLeft="@dimen/card_margin"
-    android:layout_marginRight="@dimen/card_margin"
-    android:layout_marginStart="@dimen/card_margin"
-    android:layout_marginTop="@dimen/normal_padding"
     app:cardElevation="@dimen/card_elevation">
 
     <RelativeLayout
@@ -19,57 +14,46 @@
 
         <!-- News block -->
         <RelativeLayout
-            android:id="@+id/relativeItemImage"
+            android:id="@+id/newsImageView"
             android:layout_width="match_parent"
             android:layout_height="180sp">
 
             <ImageView
-                android:id="@+id/ivNewsImage"
+                android:id="@+id/newsImage"
+                style="@style/NewsArticle.Image"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_size"
                 android:contentDescription="@string/news_image"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/img_test_one" />
+                tools:src="@drawable/tools_placeholder" />
 
             <TextView
-                android:id="@+id/tvNewsAuthor"
+                android:id="@+id/newsAuthor"
+                style="@style/NewsArticle.Author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@color/color_transparent"
-                android:maxLines="1"
-                android:padding="@dimen/normal_padding"
-                android:textAllCaps="true"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
                 tools:text="ABC News" />
 
         </RelativeLayout>
 
         <!-- News Title -->
         <TextView
-            android:id="@+id/tvNewsItemTitle"
+            android:id="@+id/newsTitle"
+            style="@style/NewsArticle.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/relativeItemImage"
-            android:maxLines="2"
-            android:padding="@dimen/normal_padding"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/textview_size_normal"
+            android:layout_below="@+id/newsImageView"
             tools:text="Elon Musk says Tesla can't yet launch in India" />
 
-        <!-- Date - Time -->
+        <!-- Publish at -->
         <TextView
-            android:id="@+id/tvListItemDateTime"
+            android:id="@+id/newsPublishedAt"
+            style="@style/NewsArticle.PublishedAt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvNewsItemTitle"
-            android:layout_marginBottom="@dimen/normal_padding"
+            android:layout_below="@+id/newsTitle"
             android:layout_marginStart="@dimen/normal_padding"
-            android:maxLines="2"
-            android:textAllCaps="true"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/textview_size_small"
+            android:layout_marginLeft="@dimen/normal_padding"
             tools:text="@string/str_test_date" />
 
     </RelativeLayout>

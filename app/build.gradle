@@ -15,8 +15,8 @@ android {
     defaultConfig {
         applicationId "com.akshay.newsapp"
         minSdkVersion androidMinSdkVersion
-        versionCode 3
-        versionName "2.8.5"
+        versionCode 4
+        versionName "3.0.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "NEWS_API_KEY", credentialProperty['NEWS_API_KEY'])
@@ -45,6 +45,7 @@ dependencies {
     // Kotlin Flow
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
     // Support Libraries
     implementation "androidx.appcompat:appcompat:$supportVersion"
@@ -88,6 +89,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:$espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 
     // Debug
     debugImplementation "com.amitshekhar.android:debug-db:$debugDbVersion"

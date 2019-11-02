@@ -6,20 +6,19 @@ import androidx.room.Query
 import com.akshay.newsapp.model.NewsArticles
 
 /**
- * Abstracts access to the news database
+ * Defines access layer to news articles table
  */
-//TODO: Use inheritance for code re-usability.
 @Dao
 interface NewsArticlesDao {
 
     /**
-     * Insert articles into the database
+     * Insert articles into the table
      */
     @Insert
     fun insertArticles(articles: List<NewsArticles>): List<Long>
 
     /**
-     * Get all the articles from database
+     * Get all the articles from table
      */
     @Query("SELECT * FROM news_article")
     suspend fun getNewsArticles(): List<NewsArticles>

@@ -14,15 +14,16 @@ import javax.inject.Singleton
             AndroidInjectionModule::class,
 
             // App
-            AppModule::class,
+            NewsDatabaseModule::class,
+            NewsServiceModule::class,
             ActivityModule::class,
             ViewModelModule::class
         ]
 )
 interface AppComponent {
+
     @Component.Builder
     interface Builder {
-
         @BindsInstance
         fun application(application: Application): Builder
 

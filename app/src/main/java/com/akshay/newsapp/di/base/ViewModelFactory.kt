@@ -6,6 +6,9 @@ import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
 
+/**
+ * Builds instance of [ViewModel] for DI to provide them.
+ */
 @Singleton
 class ViewModelFactory @Inject constructor(
         private val creators: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>

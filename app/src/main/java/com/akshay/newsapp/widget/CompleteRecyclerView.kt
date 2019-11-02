@@ -10,31 +10,29 @@ import androidx.annotation.StringRes
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.akshay.newsapp.R
-import com.akshay.newsapp.model.network.Status
 import com.akshay.newsapp.utils.gone
 import com.akshay.newsapp.utils.visible
+import kotlin.math.max
 
 /**
  * A custom implementation of [RecyclerView] to support
  * Empty View & Loading animation.
- *
- * @author Akshay Chordiya
  */
 class CompleteRecyclerView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyle: Int = 0
-) : androidx.recyclerview.widget.RecyclerView(context, attrs, defStyle) {
+) : RecyclerView(context, attrs, defStyle) {
 
     /**
      * Empty layout
      */
-    private var mEmptyView: View? = null
+    private var emptyView: View? = null
 
     /**
      * Progress view
      */
-    private var mProgressView: View? = null
+    private var progressView: View? = null
 
     /**
      * Column width for grid layout
@@ -52,7 +50,7 @@ class CompleteRecyclerView @JvmOverloads constructor(
         }
     }
 
-    override fun setAdapter(adapter: androidx.recyclerview.widget.RecyclerView.Adapter<*>?) {
+    override fun setAdapter(adapter: Adapter<*>?) {
         visible()
         val oldAdapter = getAdapter()
         oldAdapter?.unregisterAdapterDataObserver(mAdapterObserver)
@@ -65,56 +63,48 @@ class CompleteRecyclerView @JvmOverloads constructor(
         adapter?.let {
             val noItems = 0 == it.itemCount
             if (noItems) {
-                mProgressView?.gone()
-                mEmptyView?.visible()
+                progressView?.gone()
+                emptyView?.visible()
                 gone()
             } else {
-                mProgressView?.gone()
-                mEmptyView?.gone()
+                progressView?.gone()
+                emptyView?.gone()
                 visible()
             }
         }
     }
 
     fun setEmptyView(emptyView: View) {
-        this.mEmptyView = emptyView
-        mEmptyView?.gone()
+        this.emptyView = emptyView
+        this.emptyView?.gone()
     }
 
     fun setProgressView(progressView: View) {
-        this.mProgressView = progressView
-        mProgressView?.visible()
+        this.progressView = progressView
+        this.progressView?.visible()
     }
 
     fun setEmptyMessage(@StringRes mEmptyMessageResId: Int) {
-        val emptyText = mEmptyView?.findViewById<TextView>(R.id.empty_title)
+        val emptyText = emptyView?.findViewById<TextView>(R.id.empty_title)
         emptyText?.setText(mEmptyMessageResId)
     }
 
     fun setEmptyIcon(@DrawableRes mEmptyIconResId: Int) {
-        val emptyImage = mEmptyView?.findViewById<ImageView>(R.id.empty_image)
+        val emptyImage = emptyView?.findViewById<ImageView>(R.id.empty_image)
         emptyImage?.setImageResource(mEmptyIconResId)
     }
 
-    fun showState(status: Status) {
-        when (status) {
-            Status.SUCCESS, Status.ERROR -> {
-                mProgressView?.gone()
-                mEmptyView?.visible()
-            }
-            Status.LOADING -> {
-                mEmptyView?.gone()
-                mProgressView?.visible()
-            }
-        }
+    fun showLoading() {
+        emptyView?.gone()
+        progressView?.visible()
     }
 
     override fun onMeasure(widthSpec: Int, heightSpec: Int) {
         super.onMeasure(widthSpec, heightSpec)
-        if (layoutManager is androidx.recyclerview.widget.GridLayoutManager) {
-            val manager = layoutManager as androidx.recyclerview.widget.GridLayoutManager
+        if (layoutManager is GridLayoutManager) {
+            val manager = layoutManager as GridLayoutManager
             if (columnWidth > 0) {
-                val spanCount = Math.max(1, measuredWidth / columnWidth)
+                val spanCount = max(1, measuredWidth / columnWidth)
                 manager.spanCount = spanCount
             }
         }
@@ -123,7 +113,7 @@ class CompleteRecyclerView @JvmOverloads constructor(
     /**
      * Observes for changes in the adapter and is triggered on change
      */
-    private val mAdapterObserver = object : androidx.recyclerview.widget.RecyclerView.AdapterDataObserver() {
+    private val mAdapterObserver = object : RecyclerView.AdapterDataObserver() {
         override fun onChanged() = refreshState()
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) = refreshState()
         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) = refreshState()

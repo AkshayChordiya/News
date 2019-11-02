@@ -1,6 +1,5 @@
 package com.akshay.newsapp.api
 
-import com.akshay.newsapp.utils.LiveDataCallAdapterFactory
 import com.akshay.newsapp.utils.create
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
@@ -17,7 +16,7 @@ import java.io.IOException
 @RunWith(JUnit4::class)
 class NewsSourceServiceTest : BaseServiceTest() {
 
-    private lateinit var service: NewsSourceService
+    private lateinit var service: NewsService
 
     @Before
     @Throws(IOException::class)
@@ -25,7 +24,6 @@ class NewsSourceServiceTest : BaseServiceTest() {
         service = Retrofit.Builder()
                 .baseUrl(mockWebServer.url("/"))
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .build()
                 .create()
     }
@@ -34,7 +32,7 @@ class NewsSourceServiceTest : BaseServiceTest() {
     @Throws(IOException::class, InterruptedException::class)
     fun getNewsSource() = runBlocking {
         enqueueResponse("news_source.json")
-        val newsSource = service.getNewsSource()
+        val newsSource = service.getNewsFromGoogle()
 
         // Dummy request
         mockWebServer.takeRequest()

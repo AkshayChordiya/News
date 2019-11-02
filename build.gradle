@@ -2,7 +2,7 @@
 
 buildscript {
     // Android SDK version
-    ext.androidMinSdkVersion = 16
+    ext.androidMinSdkVersion = 21
     ext.androidTargetSdkVersion = 29
     ext.androidCompileSdkVersion = 29
 
@@ -31,7 +31,7 @@ buildscript {
     ext.glideVersion = "4.9.0"
 
     // Dagger
-    ext.dagger_version = "2.20"
+    ext.dagger_version = "2.24"
 
     // Testing
     ext.jUnitVersion = '4.12'
