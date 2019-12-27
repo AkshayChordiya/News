@@ -33,6 +33,9 @@ buildscript {
     // Dagger
     ext.dagger_version = "2.24"
 
+    //Koin
+    ext.koin_version = "2.0.1"
+
     // Testing
     ext.jUnitVersion = '4.12'
     ext.androidjUnitVersion = '1.1.1'

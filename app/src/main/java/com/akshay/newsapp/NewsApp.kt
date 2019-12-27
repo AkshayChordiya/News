@@ -1,22 +1,20 @@
 package com.akshay.newsapp
 
 import android.app.Application
-import com.akshay.newsapp.di.base.AppInjector
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
-import javax.inject.Inject
+import com.akshay.newsapp.koin.appModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
-class NewsApp : Application(), HasAndroidInjector {
-
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+class NewsApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        // Init DI magic ✨
-        AppInjector.init(this)
+        // start Koin!
+        startKoin {
+            // Android context
+            androidContext(applicationContext)
+            // modules
+            modules(appModule)
+        }
     }
-
-    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 }

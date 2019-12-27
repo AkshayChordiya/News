@@ -6,13 +6,12 @@ import androidx.lifecycle.asLiveData
 import com.akshay.newsapp.model.NewsArticles
 import com.akshay.newsapp.model.ViewState
 import com.akshay.newsapp.repo.NewsRepository
-import javax.inject.Inject
 
 /**
  * A container for [NewsArticles] related data to show on the UI.
  */
-class NewsArticleViewModel @Inject constructor(
-        newsRepository: NewsRepository
+class NewsArticleViewModel constructor(
+         newsRepository: NewsRepository
 ) : ViewModel() {
 
     private val newsArticles: LiveData<ViewState<List<NewsArticles>>> = newsRepository.getNewsArticles().asLiveData()

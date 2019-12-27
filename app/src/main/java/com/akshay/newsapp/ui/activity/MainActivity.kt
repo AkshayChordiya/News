@@ -1,22 +1,22 @@
 package com.akshay.newsapp.ui.activity
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.akshay.newsapp.R
 import com.akshay.newsapp.adapter.NewsArticlesAdapter
 import com.akshay.newsapp.model.ViewState
-import com.akshay.newsapp.ui.base.BaseActivity
 import com.akshay.newsapp.ui.viewmodel.NewsArticleViewModel
-import com.akshay.newsapp.utils.getViewModel
 import com.akshay.newsapp.utils.observeNotNull
 import com.akshay.newsapp.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.empty_layout.*
 import kotlinx.android.synthetic.main.progress_layout.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
-    private val newsArticleViewModel by lazy { getViewModel<NewsArticleViewModel>() }
+    private val newsArticleViewModel: NewsArticleViewModel by viewModel()
 
     /**
      * Starting point of the activity
