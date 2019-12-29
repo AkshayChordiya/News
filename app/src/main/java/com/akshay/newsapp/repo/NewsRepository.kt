@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import retrofit2.Retrofit
 
 /**
  * Repository abstracts the logic of fetching the data and persisting it for
@@ -17,7 +16,7 @@ import retrofit2.Retrofit
  */
 class NewsRepository constructor(
         private val newsDao: NewsArticlesDao,
-        private val retrofit: Retrofit
+        private val newsService: NewsService
 ) {
 
     /**
@@ -31,7 +30,7 @@ class NewsRepository constructor(
             emit(ViewState.success(newsDao.getNewsArticles()))
 
             // 2. Try fetching new news -> save + emit
-            val newsSource = retrofit.create(NewsService::class.java).getNewsFromGoogle()
+            val newsSource = newsService.getNewsFromGoogle()
             newsDao.insertArticles(newsSource.articles)
 
             // 3. Get articles from database [Single source of truth]

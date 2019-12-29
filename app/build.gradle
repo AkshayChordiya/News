@@ -74,9 +74,8 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
-    // Koin for Android
+    // Koin
     implementation "org.koin:koin-android:$koin_version"
-    // Koin AndroidX ViewModel features
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
     // Testing
