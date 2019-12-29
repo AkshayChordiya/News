@@ -30,10 +30,7 @@ buildscript {
     // Glide
     ext.glideVersion = "4.9.0"
 
-    // Dagger
-    ext.dagger_version = "2.24"
-
-    //Koin
+    // Koin
     ext.koin_version = "2.0.1"
 
     // Testing
