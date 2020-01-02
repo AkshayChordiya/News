@@ -9,7 +9,7 @@ class NewsApp : Application() {
 		super.onCreate()
 
 		// Init DI magic ✨
-		AppInjector.init(this@NewsApp)
+		AppInjector.init(this)
 
 	}
 }
