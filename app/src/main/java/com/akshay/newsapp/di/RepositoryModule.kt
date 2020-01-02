@@ -1,4 +1,4 @@
-package com.akshay.newsapp.koin.modules
+package com.akshay.newsapp.di
 
 import com.akshay.newsapp.repo.NewsRepository
 import org.koin.dsl.module
@@ -6,11 +6,10 @@ import org.koin.dsl.module
 /**
  * Repository initializations
  */
-
 val repositoryModule = module {
 
-	// NewsRepository instance
 	single {
 		NewsRepository(get(), get())
 	}
+
 }

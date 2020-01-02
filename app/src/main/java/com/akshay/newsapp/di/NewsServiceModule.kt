@@ -1,4 +1,4 @@
-package com.akshay.newsapp.koin.modules
+package com.akshay.newsapp.di
 
 import com.akshay.newsapp.api.NewsService
 import org.koin.dsl.module
@@ -8,15 +8,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * All network related initializations
  */
-
 val newsServiceModule = module {
 
-	// Retrofit Instance
 	single {
 		retrofit()
 	}
 
-	// NewsService Instance
 	single { get<Retrofit>().create(NewsService::class.java) }
 
 }
