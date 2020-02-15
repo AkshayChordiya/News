@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.akshay.newsapp.ui.activity.MainActivity"
+    tools:context=".news.ui.activity.MainActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 
 
-    <com.akshay.newsapp.widget.CompleteRecyclerView
+    <com.akshay.newsapp.core.widget.CompleteRecyclerView
         android:id="@+id/newsList"
         android:layout_width="0dp"
         android:layout_height="0dp"
