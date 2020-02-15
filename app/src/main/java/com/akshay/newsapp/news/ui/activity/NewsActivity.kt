@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.empty_layout.*
 import kotlinx.android.synthetic.main.progress_layout.*
 
-class MainActivity : BaseActivity() {
+class NewsActivity : BaseActivity() {
 
     private val newsArticleViewModel by lazy { getViewModel<NewsArticleViewModel>() }
 

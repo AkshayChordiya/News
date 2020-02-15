@@ -4,6 +4,8 @@ import com.akshay.newsapp.news.api.NewsService
 import com.akshay.newsapp.news.storage.NewsArticlesDao
 import com.akshay.newsapp.news.model.NewsArticles
 import com.akshay.newsapp.core.ui.ViewState
+import dagger.Binds
+import dagger.Module
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -16,17 +18,22 @@ import javax.inject.Singleton
  * Repository abstracts the logic of fetching the data and persisting it for
  * offline. They are the data source as the single source of truth.
  */
-@Singleton
-class NewsRepository @Inject constructor(
-        private val newsDao: NewsArticlesDao,
-        private val newsService: NewsService
-) {
+interface NewsRepository {
 
     /**
      * Fetch the news articles from database if exist else fetch from web
      * and persist them in the database
      */
-    fun getNewsArticles(): Flow<ViewState<List<NewsArticles>>> {
+    fun getNewsArticles(): Flow<ViewState<List<NewsArticles>>>
+}
+
+@Singleton
+class DefaultNewsRepository @Inject constructor(
+        private val newsDao: NewsArticlesDao,
+        private val newsService: NewsService
+): NewsRepository {
+
+    override fun getNewsArticles(): Flow<ViewState<List<NewsArticles>>> {
         return flow {
             // 1. Start with loading + data from database
             emit(ViewState.loading())
@@ -42,5 +49,10 @@ class NewsRepository @Inject constructor(
             emit(ViewState.error(it.message.orEmpty()))
         }.flowOn(Dispatchers.IO)
     }
+}
 
+@Module
+interface NewsRepositoryModule {
+    /* Exposes the concrete implementation for the interface */
+    @Binds fun it(it: DefaultNewsRepository): NewsRepository
 }

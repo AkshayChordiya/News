@@ -3,9 +3,11 @@ package com.akshay.newsapp.news.di
 import android.app.Application
 import com.akshay.newsapp.NewsApp
 import com.akshay.newsapp.core.di.NewsServiceModule
+import com.akshay.newsapp.core.di.ViewModelFactoryModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
 @Singleton
@@ -14,22 +16,21 @@ import javax.inject.Singleton
             // Dagger support
             AndroidInjectionModule::class,
 
-            // App
+            // Global
             NewsDatabaseModule::class,
             NewsServiceModule::class,
-            NewsActivityBindingModule::class,
-            ViewModelModule::class
+            ViewModelFactoryModule::class,
+
+            // News feature
+            NewsFeatureBindingModule::class
         ]
 )
-interface AppComponent {
+interface AppComponent : AndroidInjector<NewsApp> {
 
-    @Component.Builder
-    interface Builder {
-        @BindsInstance
-        fun application(application: Application): Builder
-
-        fun build(): AppComponent
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance application: Application): AppComponent
     }
 
-    fun inject(newsApp: NewsApp)
+    override fun inject(newsApp: NewsApp)
 }

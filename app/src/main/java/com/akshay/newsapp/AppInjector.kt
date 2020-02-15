@@ -13,15 +13,16 @@ import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 
 /**
- * Helper class to automatically inject fragments if they implement [Injectable].
+ * Helper class to automatically inject into activities which implement
+ * [HasAndroidInjector] and fragments if they implement [Injectable].
  */
 object AppInjector {
 
     /**
-     * Initialize Dagger magic ✨
+     * Initialize DI magic ✨
      */
     fun init(app: NewsApp) {
-        DaggerAppComponent.builder().application(app).build().inject(app)
+        DaggerAppComponent.factory().create(app).inject(app)
         app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) = handleActivity(activity)
 

@@ -8,7 +8,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class NewsServiceModule {
+object NewsServiceModule {
+
+    private const val BASE_URL = "https://newsapi.org/v1/"
 
     @Singleton
     @Provides
@@ -18,9 +20,5 @@ class NewsServiceModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(NewsService::class.java)
-    }
-
-    companion object {
-        private const val BASE_URL = "https://newsapi.org/v1/"
     }
 }
