@@ -28,7 +28,7 @@ class NewsRepositoryTest : MockitoTest() {
     lateinit var newsSourceService: NewsService
 
     @InjectMocks
-    lateinit var newsRepository: NewsRepository
+    lateinit var newsRepository: DefaultNewsRepository
 
     @Test
     fun `get news articles when there is internet`() = runBlocking {
