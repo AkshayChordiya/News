@@ -31,7 +31,7 @@ buildscript {
     ext.glideVersion = "4.9.0"
 
     // Dagger
-    ext.daggerVersion = "2.25.4"
+    ext.daggerVersion = "2.26"
 
     // Testing
     ext.jUnitVersion = '4.12'
