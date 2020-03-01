@@ -7,16 +7,15 @@ import com.akshay.newsapp.news.model.NewsSourceResponse
 import com.akshay.newsapp.core.ui.ViewState
 import com.akshay.newsapp.core.utils.MockitoTest
 import com.akshay.newsapp.core.utils.assertItems
-import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.doReturnConsecutively
-import com.nhaarman.mockitokotlin2.doThrow
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.InjectMocks
 import org.mockito.Mock
+import retrofit2.Response
 
 @RunWith(JUnit4::class)
 class NewsRepositoryTest : MockitoTest() {
@@ -34,17 +33,19 @@ class NewsRepositoryTest : MockitoTest() {
     fun `get news articles when there is internet`() = runBlocking {
         // GIVEN
         val cachedArticles = listOf(NewsArticles(title = "Cached"))
-        val response = NewsSourceResponse(articles = listOf(NewsArticles(title = "Fetched")))
+        val fetchedArticles = listOf(NewsArticles(title = "Fetched"))
+        val newsSource = NewsSourceResponse(articles = fetchedArticles)
+        val response = Response.success(newsSource)
 
         // WHEN
         whenever(newsSourceService.getNewsFromGoogle()) doReturn response
-        whenever(newsDao.getNewsArticles()) doReturnConsecutively listOf(cachedArticles, response.articles)
+        whenever(newsDao.getNewsArticles()) doReturnConsecutively listOf(flowOf(cachedArticles), flowOf(fetchedArticles))
 
         // THEN
         newsRepository.getNewsArticles().assertItems(
                 ViewState.loading(),
                 ViewState.success(cachedArticles),
-                ViewState.success(response.articles)
+                ViewState.success(fetchedArticles)
         )
     }
 
@@ -52,11 +53,11 @@ class NewsRepositoryTest : MockitoTest() {
     fun `get cached news articles when there is no internet`() = runBlocking {
         // GIVEN
         val cachedArticles = listOf(NewsArticles(title = "Cached"))
-        val error = RuntimeException("No internet connection")
+        val error = RuntimeException("Unable to fetch from network")
 
         // WHEN
         whenever(newsSourceService.getNewsFromGoogle()) doThrow error
-        whenever(newsDao.getNewsArticles()) doReturn cachedArticles
+        whenever(newsDao.getNewsArticles()) doReturn flowOf(cachedArticles)
 
         // THEN
         newsRepository.getNewsArticles().assertItems(

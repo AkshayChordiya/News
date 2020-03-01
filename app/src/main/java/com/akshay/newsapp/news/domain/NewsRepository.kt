@@ -1,16 +1,17 @@
 package com.akshay.newsapp.news.domain
 
-import com.akshay.newsapp.news.api.NewsService
-import com.akshay.newsapp.news.storage.NewsArticlesDao
-import com.akshay.newsapp.news.model.NewsArticles
+import com.akshay.newsapp.core.domain.NetworkBoundResource
 import com.akshay.newsapp.core.ui.ViewState
+import com.akshay.newsapp.news.api.NewsService
+import com.akshay.newsapp.news.model.NewsArticles
+import com.akshay.newsapp.news.model.NewsSourceResponse
+import com.akshay.newsapp.news.storage.NewsArticlesDao
 import dagger.Binds
 import dagger.Module
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,8 +22,9 @@ import javax.inject.Singleton
 interface NewsRepository {
 
     /**
-     * Fetch the news articles from database if exist else fetch from web
-     * and persist them in the database
+     * Gets tne cached news article from database and tries to get
+     * fresh news articles from web and save into database
+     * if that fails then continues showing cached data.
      */
     fun getNewsArticles(): Flow<ViewState<List<NewsArticles>>>
 }
@@ -31,23 +33,18 @@ interface NewsRepository {
 class DefaultNewsRepository @Inject constructor(
         private val newsDao: NewsArticlesDao,
         private val newsService: NewsService
-): NewsRepository {
+) : NewsRepository {
 
     override fun getNewsArticles(): Flow<ViewState<List<NewsArticles>>> {
-        return flow {
-            // 1. Start with loading + data from database
-            emit(ViewState.loading())
-            emit(ViewState.success(newsDao.getNewsArticles()))
-
-            // 2. Try fetching new news -> save + emit
-            val newsSource = newsService.getNewsFromGoogle()
-            newsDao.insertArticles(newsSource.articles)
-
-            // 3. Get articles from database [Single source of truth]
-            emit(ViewState.success(newsDao.getNewsArticles()))
-        }.catch {
-            emit(ViewState.error(it.message.orEmpty()))
-        }.flowOn(Dispatchers.IO)
+        return object : NetworkBoundResource<List<NewsArticles>, NewsSourceResponse>() {
+            override suspend fun saveNetworkResult(response: NewsSourceResponse) = newsDao.clearAndCacheArticles(response.articles)
+            // Always try to fetch new articles
+            override fun shouldFetch(data: List<NewsArticles>?): Boolean = true
+            override fun loadFromDb(): Flow<List<NewsArticles>> = newsDao.getNewsArticles()
+            override suspend fun fetchFromNetwork(): Response<NewsSourceResponse> = newsService.getNewsFromGoogle()
+        }
+        .asFlow()
+        .flowOn(Dispatchers.IO)
     }
 }
 

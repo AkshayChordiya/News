@@ -32,7 +32,7 @@ class NewsSourceServiceTest : BaseServiceTest() {
     @Throws(IOException::class, InterruptedException::class)
     fun getNewsSource() = runBlocking {
         enqueueResponse("news_source.json")
-        val newsSource = service.getNewsFromGoogle()
+        val newsSource = service.getNewsFromGoogle().body() ?: return@runBlocking
 
         // Dummy request
         mockWebServer.takeRequest()
