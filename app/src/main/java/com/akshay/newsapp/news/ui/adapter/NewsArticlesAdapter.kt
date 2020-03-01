@@ -2,11 +2,13 @@ package com.akshay.newsapp.news.ui.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.akshay.newsapp.R
-import com.akshay.newsapp.news.ui.model.NewsAdapterEvent
-import com.akshay.newsapp.news.model.NewsArticles
 import com.akshay.newsapp.core.utils.inflate
+import com.akshay.newsapp.news.model.NewsArticles
+import com.akshay.newsapp.news.ui.model.NewsAdapterEvent
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -17,12 +19,7 @@ import kotlinx.android.synthetic.main.row_news_article.view.*
  */
 class NewsArticlesAdapter(
         private val listener: (NewsAdapterEvent) -> Unit
-) : RecyclerView.Adapter<NewsArticlesAdapter.NewsHolder>() {
-
-    /**
-     * List of news articles
-     */
-    private var newsArticles: List<NewsArticles> = emptyList()
+) : ListAdapter<NewsArticles, NewsArticlesAdapter.NewsHolder>(DIFF_CALLBACK) {
 
     /**
      * Inflate the view
@@ -32,12 +29,7 @@ class NewsArticlesAdapter(
     /**
      * Bind the view with the data
      */
-    override fun onBindViewHolder(newsHolder: NewsHolder, position: Int) = newsHolder.bind(newsArticles[position], listener)
-
-    /**
-     * Number of items in the list to display
-     */
-    override fun getItemCount() = newsArticles.size
+    override fun onBindViewHolder(newsHolder: NewsHolder, position: Int) = newsHolder.bind(getItem(position), listener)
 
     /**
      * View Holder Pattern
@@ -62,14 +54,12 @@ class NewsArticlesAdapter(
                     .into(newsImage)
             setOnClickListener { listener(NewsAdapterEvent.ClickEvent) }
         }
-
     }
 
-    /**
-     * Swap function to set new data on updating
-     */
-    fun replaceItems(items: List<NewsArticles>) {
-        newsArticles = items
-        notifyDataSetChanged()
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NewsArticles>() {
+            override fun areItemsTheSame(oldItem: NewsArticles, newItem: NewsArticles): Boolean = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: NewsArticles, newItem: NewsArticles): Boolean = oldItem == newItem
+        }
     }
 }

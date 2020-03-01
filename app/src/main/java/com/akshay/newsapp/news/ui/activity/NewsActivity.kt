@@ -36,7 +36,7 @@ class NewsActivity : BaseActivity() {
         // Update the UI on state change
         newsArticleViewModel.getNewsArticles().observeNotNull(this) { state ->
             when (state) {
-                is ViewState.Success -> adapter.replaceItems(state.data)
+                is ViewState.Success -> adapter.submitList(state.data)
                 is ViewState.Loading -> newsList.showLoading()
                 is ViewState.Error -> toast("Something went wrong ¯\\_(ツ)_/¯ => ${state.message}")
             }
