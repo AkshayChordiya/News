@@ -31,7 +31,7 @@ sealed class ViewState<ResultType> {
      *  Describes error state of the UI
      */
     data class Error<ResultType>(
-            val message: String = ""
+            val message: String
     ) : ViewState<ResultType>()
 
     companion object {
