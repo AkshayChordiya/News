@@ -15,7 +15,7 @@ buildscript {
     ext.liveDataKtx = '2.2.0'
 
     // Android library
-    ext.androidGradlePlugin = '3.5.3'
+    ext.androidGradlePlugin = '3.6.1'
     ext.supportVersion = '1.1.0'
     ext.recyclerViewVersion = '1.1.0'
     ext.cardViewVersion = '1.0.0'
