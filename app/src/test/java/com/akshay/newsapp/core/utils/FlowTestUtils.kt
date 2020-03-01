@@ -9,12 +9,12 @@ import org.junit.Assert.assertEquals
  * Asserts only the [expected] items by just taking that many from the stream
  */
 suspend fun <T> Flow<T>.assertItems(vararg expected: T) {
-    assertEquals(this.take(expected.size).toList(), expected.toList())
+    assertEquals(expected.toList(), this.take(expected.size).toList())
 }
 
 /**
  * Takes all elements from the stream and asserts them.
  */
 suspend fun <T> Flow<T>.assertCompleteStream(vararg expected: T) {
-    assertEquals(this.toList(), expected.toList())
+    assertEquals(expected.toList(), this.toList())
 }
