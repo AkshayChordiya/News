@@ -2,6 +2,7 @@ package com.akshay.newsapp.news.ui.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -18,8 +19,10 @@ import kotlinx.android.synthetic.main.row_news_article.view.*
  * The News adapter to show the news in a list.
  */
 class NewsArticlesAdapter(
-        private val listener: (NewsAdapterEvent) -> Unit
+    private val listener: (NewsAdapterEvent) -> Unit
 ) : ListAdapter<NewsArticles, NewsArticlesAdapter.NewsHolder>(DIFF_CALLBACK) {
+
+    private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
 
     /**
      * Inflate the view
@@ -30,6 +33,27 @@ class NewsArticlesAdapter(
      * Bind the view with the data
      */
     override fun onBindViewHolder(newsHolder: NewsHolder, position: Int) = newsHolder.bind(getItem(position), listener)
+
+    /**
+     * Override [ListAdapter.submitList] and use [AsyncListDiffer.submitList]
+     */
+    override fun submitList(list: MutableList<NewsArticles>?) {
+        differ.submitList(list)
+    }
+
+    /**
+     * Override [ListAdapter.getItem] and use [AsyncListDiffer.getItem]
+     */
+    override fun getItem(position: Int): NewsArticles {
+        return differ.currentList.get(position)
+    }
+
+    /**
+     * Override [ListAdapter.getItemCount] and use [AsyncListDiffer.getItemCount]
+     */
+    override fun getItemCount(): Int {
+        return differ.currentList.size
+    }
 
     /**
      * View Holder Pattern
@@ -46,12 +70,12 @@ class NewsArticlesAdapter(
             //tvListItemDateTime.text = getFormattedDate(newsArticle.publishedAt)
             newsPublishedAt.text = newsArticle.publishedAt
             Glide.with(context)
-                    .load(newsArticle.urlToImage)
-                    .apply(RequestOptions()
-                            .placeholder(R.drawable.tools_placeholder)
-                            .error(R.drawable.tools_placeholder)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL))
-                    .into(newsImage)
+                .load(newsArticle.urlToImage)
+                .apply(RequestOptions()
+                    .placeholder(R.drawable.tools_placeholder)
+                    .error(R.drawable.tools_placeholder)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL))
+                .into(newsImage)
             setOnClickListener { listener(NewsAdapterEvent.ClickEvent) }
         }
     }
