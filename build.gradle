@@ -27,8 +27,8 @@ buildscript {
     ext.retrofitVersion = '2.7.1'
     ext.okHttpVersion = '4.3.1'
 
-    // Glide
-    ext.glideVersion = "4.9.0"
+    // Coil
+    ext.coilVersion = "0.9.5"
 
     // Dagger
     ext.daggerVersion = "2.26"

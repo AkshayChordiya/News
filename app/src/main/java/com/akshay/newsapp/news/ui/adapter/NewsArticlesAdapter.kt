@@ -5,13 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import com.akshay.newsapp.R
 import com.akshay.newsapp.core.utils.inflate
 import com.akshay.newsapp.news.model.NewsArticles
 import com.akshay.newsapp.news.ui.model.NewsAdapterEvent
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.row_news_article.view.*
 
 /**
@@ -45,13 +43,11 @@ class NewsArticlesAdapter(
             //TODO: need to format date
             //tvListItemDateTime.text = getFormattedDate(newsArticle.publishedAt)
             newsPublishedAt.text = newsArticle.publishedAt
-            Glide.with(context)
-                    .load(newsArticle.urlToImage)
-                    .apply(RequestOptions()
-                            .placeholder(R.drawable.tools_placeholder)
-                            .error(R.drawable.tools_placeholder)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL))
-                    .into(newsImage)
+            newsImage.load(newsArticle.urlToImage) {
+                placeholder(R.drawable.tools_placeholder)
+                error(R.drawable.tools_placeholder)
+                // Disk cache is enabled by default in Coil load request
+            }
             setOnClickListener { listener(NewsAdapterEvent.ClickEvent) }
         }
     }
