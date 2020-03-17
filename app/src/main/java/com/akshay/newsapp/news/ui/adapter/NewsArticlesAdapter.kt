@@ -46,7 +46,6 @@ class NewsArticlesAdapter(
             newsImage.load(newsArticle.urlToImage) {
                 placeholder(R.drawable.tools_placeholder)
                 error(R.drawable.tools_placeholder)
-                // Disk cache is enabled by default in Coil load request
             }
             setOnClickListener { listener(NewsAdapterEvent.ClickEvent) }
         }
