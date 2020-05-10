@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.row_news_article.view.*
  * The News adapter to show the news in a list.
  */
 class NewsArticlesAdapter(
-        private val listener: (NewsAdapterEvent) -> Unit
+        private val listener: (NewsArticles) -> Unit
 ) : ListAdapter<NewsArticles, NewsArticlesAdapter.NewsHolder>(DIFF_CALLBACK) {
 
     /**
@@ -37,7 +37,7 @@ class NewsArticlesAdapter(
         /**
          * Binds the UI with the data and handles clicks
          */
-        fun bind(newsArticle: NewsArticles, listener: (NewsAdapterEvent) -> Unit) = with(itemView) {
+        fun bind(newsArticle: NewsArticles, listener: (NewsArticles) -> Unit) = with(itemView) {
             newsTitle.text = newsArticle.title
             newsAuthor.text = newsArticle.author
             //TODO: need to format date
@@ -47,7 +47,7 @@ class NewsArticlesAdapter(
                 placeholder(R.drawable.tools_placeholder)
                 error(R.drawable.tools_placeholder)
             }
-            setOnClickListener { listener(NewsAdapterEvent.ClickEvent) }
+            setOnClickListener { listener(newsArticle) }
         }
     }
 

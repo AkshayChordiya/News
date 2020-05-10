@@ -1,5 +1,6 @@
 package com.akshay.newsapp.news.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.akshay.newsapp.R
@@ -29,7 +30,11 @@ class NewsActivity : BaseActivity() {
         newsList.setEmptyView(empty_view)
         newsList.setProgressView(progress_view)
 
-        val adapter = NewsArticlesAdapter { toast("Clicked on item") }
+        val adapter = NewsArticlesAdapter {
+            val intent = Intent(this, NewsDetailActivity::class.java)
+            intent.putExtras(Bundle().apply { putParcelable("details", it) })
+            startActivity(intent)
+        }
         newsList.adapter = adapter
         newsList.layoutManager = LinearLayoutManager(this)
 

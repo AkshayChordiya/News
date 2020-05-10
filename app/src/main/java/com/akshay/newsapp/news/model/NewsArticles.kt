@@ -1,11 +1,13 @@
 package com.akshay.newsapp.news.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.akshay.newsapp.news.model.NewsArticles.NewsArticles.Column
 import com.akshay.newsapp.news.model.NewsArticles.NewsArticles.tableName
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 /**
  * News Article Model describing the article details
@@ -14,6 +16,7 @@ import com.google.gson.annotations.SerializedName
  * Warning: Ideally network and database model should be different.
  * They are same for this sample app.
  */
+@Parcelize
 @Entity(tableName = tableName)
 data class NewsArticles(
 
@@ -64,7 +67,7 @@ data class NewsArticles(
         @ColumnInfo(name = Column.publishedAt)
         @SerializedName(Column.publishedAt)
         val publishedAt: String? = null
-) {
+) : Parcelable {
     object NewsArticles {
         const val tableName = "news_article"
 
