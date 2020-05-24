@@ -7,20 +7,20 @@ buildscript {
     ext.androidCompileSdkVersion = 29
 
     // Kotlin
-    ext.kotlinVersion = '1.3.61'
-    ext.coroutinesVersion = '1.3.3'
+    ext.kotlinVersion = '1.3.72'
+    ext.coroutinesVersion = '1.3.7'
     ext.ankoVersion = '0.10.4'
 
     // KTX
     ext.liveDataKtx = '2.2.0'
 
     // Android library
-    ext.androidGradlePlugin = '3.6.1'
+    ext.androidGradlePlugin = '3.6.3'
     ext.supportVersion = '1.1.0'
     ext.recyclerViewVersion = '1.1.0'
     ext.cardViewVersion = '1.0.0'
     ext.lifecycleVersion = "2.2.0"
-    ext.roomVersion = "2.2.3"
+    ext.roomVersion = "2.2.5"
     ext.constraintLayoutVersion = '1.1.3'
 
     // Networking
@@ -28,10 +28,10 @@ buildscript {
     ext.okHttpVersion = '4.3.1'
 
     // Coil
-    ext.coilVersion = "0.9.5"
+    ext.coilVersion = "0.11.0"
 
     // Dagger
-    ext.daggerVersion = "2.26"
+    ext.daggerVersion = "2.27"
 
     // Testing
     ext.jUnitVersion = '4.12'
