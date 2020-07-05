@@ -15,7 +15,7 @@ buildscript {
     ext.liveDataKtx = '2.2.0'
 
     // Android library
-    ext.androidGradlePlugin = '3.6.3'
+    ext.androidGradlePlugin = '4.0.0'
     ext.supportVersion = '1.1.0'
     ext.recyclerViewVersion = '1.1.0'
     ext.cardViewVersion = '1.0.0'
@@ -31,7 +31,7 @@ buildscript {
     ext.coilVersion = "0.11.0"
 
     // Dagger
-    ext.daggerVersion = "2.27"
+    ext.daggerVersion = "2.28.1"
 
     // Testing
     ext.jUnitVersion = '4.12'
