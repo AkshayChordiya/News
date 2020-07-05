@@ -96,5 +96,6 @@ dependencies {
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
 
     // Debug
+    implementation "com.jakewharton.timber:timber:$timberVersion"
     debugImplementation "com.amitshekhar.android:debug-db:$debugDbVersion"
 }
