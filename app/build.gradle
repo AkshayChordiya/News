@@ -31,6 +31,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    sourceSets {
+        // Share test utilities between unit and instrumented tests
+        test.java.srcDirs += 'src/sharedTest/kotlin'
+        androidTest.java.srcDirs += 'src/sharedTest/kotlin'
+    }
 }
 
 kapt {
