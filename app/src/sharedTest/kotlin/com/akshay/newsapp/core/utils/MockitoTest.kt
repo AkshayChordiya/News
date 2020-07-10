@@ -19,7 +19,7 @@ import org.mockito.MockitoAnnotations
 abstract class MockitoTest {
 
     @Before
-    fun setup() {
+    open fun setup() {
         MockitoAnnotations.initMocks(this)
     }
 }
