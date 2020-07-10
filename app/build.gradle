@@ -37,6 +37,17 @@ android {
         test.java.srcDirs += 'src/sharedTest/kotlin'
         androidTest.java.srcDirs += 'src/sharedTest/kotlin'
     }
+
+    packagingOptions {
+        // Exclude files not needed at runtime
+        exclude "META-INF/**"
+        exclude "*.txt"
+
+        // Exclude Kotlin metadata
+        exclude "**.kotlin_metadata"
+        exclude "**.kotlin_builtins"
+        exclude "**.kotlin_module"
+    }
 }
 
 kapt {
@@ -103,6 +114,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+    androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
 
     // Debug
     implementation "com.jakewharton.timber:timber:$timberVersion"
