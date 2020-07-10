@@ -30,21 +30,19 @@ class NewsRepositoryTest : MockitoTest() {
     lateinit var newsRepository: DefaultNewsRepository
 
     @Test
-    fun `get news articles when there is internet`() = runBlocking {
+    fun `get news articles from web when there is internet`() = runBlocking {
         // GIVEN
-        val cachedArticles = listOf(NewsArticles(title = "Cached"))
-        val fetchedArticles = listOf(NewsArticles(title = "Fetched"))
+        val fetchedArticles = listOf(NewsArticles(title="Fetched 1"), NewsArticles(title = "Fetched 2"))
         val newsSource = NewsSourceResponse(articles = fetchedArticles)
         val response = Response.success(newsSource)
 
         // WHEN
         whenever(newsSourceService.getNewsFromGoogle()) doReturn response
-        whenever(newsDao.getNewsArticles()) doReturnConsecutively listOf(flowOf(cachedArticles), flowOf(fetchedArticles))
+        whenever(newsDao.getNewsArticles()) doReturn flowOf(fetchedArticles)
 
         // THEN
         newsRepository.getNewsArticles().assertItems(
                 ViewState.loading(),
-                ViewState.success(cachedArticles),
                 ViewState.success(fetchedArticles)
         )
     }
@@ -62,8 +60,7 @@ class NewsRepositoryTest : MockitoTest() {
         // THEN
         newsRepository.getNewsArticles().assertItems(
                 ViewState.loading(),
-                ViewState.success(cachedArticles),
-                ViewState.error(error.message.orEmpty())
+                ViewState.success(cachedArticles)
         )
     }
 }

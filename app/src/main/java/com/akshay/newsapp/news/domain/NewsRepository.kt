@@ -1,7 +1,7 @@
 package com.akshay.newsapp.news.domain
 
-import com.akshay.newsapp.core.domain.NetworkBoundResource
 import com.akshay.newsapp.core.ui.ViewState
+import com.akshay.newsapp.core.utils.httpError
 import com.akshay.newsapp.news.api.NewsService
 import com.akshay.newsapp.news.model.NewsArticles
 import com.akshay.newsapp.news.model.NewsSourceResponse
@@ -10,7 +10,10 @@ import dagger.Binds
 import dagger.Module
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -27,6 +30,11 @@ interface NewsRepository {
      * if that fails then continues showing cached data.
      */
     fun getNewsArticles(): Flow<ViewState<List<NewsArticles>>>
+
+    /**
+     * Gets fresh news from web.
+     */
+    suspend fun getNewsFromWebservice(): Response<NewsSourceResponse>
 }
 
 @Singleton
@@ -35,16 +43,26 @@ class DefaultNewsRepository @Inject constructor(
         private val newsService: NewsService
 ) : NewsRepository {
 
-    override fun getNewsArticles(): Flow<ViewState<List<NewsArticles>>> {
-        return object : NetworkBoundResource<List<NewsArticles>, NewsSourceResponse>() {
-            override suspend fun saveNetworkResult(response: NewsSourceResponse) = newsDao.clearAndCacheArticles(response.articles)
-            // Always try to fetch new articles
-            override fun shouldFetch(data: List<NewsArticles>?): Boolean = true
-            override fun loadFromDb(): Flow<List<NewsArticles>> = newsDao.getNewsArticles()
-            override suspend fun fetchFromNetwork(): Response<NewsSourceResponse> = newsService.getNewsFromGoogle()
+    override fun getNewsArticles(): Flow<ViewState<List<NewsArticles>>> = flow {
+        // 1. Start with loading
+        emit(ViewState.loading())
+
+        // 2. Try to fetch fresh news from web + cache if any
+        val freshNews = getNewsFromWebservice()
+        freshNews.body()?.articles?.let(newsDao::clearAndCacheArticles)
+
+        // 3. Get news from cache [cache is always source of truth]
+        val cachedNews = newsDao.getNewsArticles()
+        emitAll(cachedNews.map { ViewState.success(it) })
+    }
+    .flowOn(Dispatchers.IO)
+
+    override suspend fun getNewsFromWebservice(): Response<NewsSourceResponse> {
+        return try {
+            newsService.getNewsFromGoogle()
+        } catch (e: Exception) {
+            httpError(404)
         }
-        .asFlow()
-        .flowOn(Dispatchers.IO)
     }
 }
 
