@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.akshay.newsapp.core.utils.assertItems
 import com.akshay.newsapp.news.model.NewsArticles
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.equalTo
@@ -47,9 +48,7 @@ class NewsArticlesDaoTest {
         db.newsArticlesDao().insertArticles(input)
 
         // THEN
-        val articles = db.newsArticlesDao().getNewsArticles()
-        assertThat(articles.size, equalTo(articles.size))
-        assertThat(articles, equalTo(articles))
+        db.newsArticlesDao().getNewsArticles().assertItems(input)
     }
 
 }
