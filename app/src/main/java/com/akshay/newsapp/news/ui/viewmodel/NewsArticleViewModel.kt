@@ -1,17 +1,17 @@
 package com.akshay.newsapp.news.ui.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.akshay.newsapp.news.model.NewsArticles
 import com.akshay.newsapp.core.ui.ViewState
 import com.akshay.newsapp.news.domain.NewsRepository
-import javax.inject.Inject
+import com.akshay.newsapp.news.model.NewsArticles
 
 /**
  * A container for [NewsArticles] related data to show on the UI.
  */
-class NewsArticleViewModel @Inject constructor(
+class NewsArticleViewModel @ViewModelInject constructor(
         newsRepository: NewsRepository
 ) : ViewModel() {
 
