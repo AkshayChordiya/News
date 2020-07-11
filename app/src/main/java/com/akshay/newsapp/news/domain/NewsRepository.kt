@@ -8,6 +8,8 @@ import com.akshay.newsapp.news.model.NewsSourceResponse
 import com.akshay.newsapp.news.storage.NewsArticlesDao
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
@@ -67,6 +69,7 @@ class DefaultNewsRepository @Inject constructor(
 }
 
 @Module
+@InstallIn(ApplicationComponent::class)
 interface NewsRepositoryModule {
     /* Exposes the concrete implementation for the interface */
     @Binds fun it(it: DefaultNewsRepository): NewsRepository
