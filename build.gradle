@@ -3,8 +3,8 @@
 buildscript {
     // Android SDK version
     ext.androidMinSdkVersion = 21
-    ext.androidTargetSdkVersion = 29
-    ext.androidCompileSdkVersion = 29
+    ext.androidTargetSdkVersion = 30
+    ext.androidCompileSdkVersion = 30
 
     // Kotlin
     ext.kotlinVersion = '1.3.72'
@@ -30,11 +30,14 @@ buildscript {
     // Coil
     ext.coilVersion = "0.11.0"
 
-    // Dagger
+    // Hilt + Dagger2
+    ext.hiltAndroidVersion = "2.28-alpha"
     ext.daggerVersion = "2.28.1"
+    ext.hiltViewModelVersion = "1.0.0-alpha01"
 
     // KTX
     ext.coreKtxVersion = "1.3.0"
+    ext.fragmentKtxVersion = "1.2.5"
 
     // Testing
     ext.jUnitVersion = '4.12'
@@ -56,6 +59,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$androidGradlePlugin"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltAndroidVersion"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
