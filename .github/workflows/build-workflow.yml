@@ -44,7 +44,14 @@ jobs:
     # 5. Build
     - name: Build with Gradle
       run: ./gradlew build
+
+    # 6. Upload APK Artifact
+    - name: Upload APK
+      uses: actions/upload-artifact@v1
+      with:
+        name: news-app
+        path: app/build/outputs/apk/debug/app-debug.apk
       
-    # 6. Test
+    # 7. Test
     - name: Unit tests
       run: ./gradlew test
