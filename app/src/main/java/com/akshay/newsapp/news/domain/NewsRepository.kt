@@ -2,9 +2,10 @@ package com.akshay.newsapp.news.domain
 
 import com.akshay.newsapp.core.ui.ViewState
 import com.akshay.newsapp.core.utils.httpError
+import com.akshay.newsapp.news.NewsMapper
 import com.akshay.newsapp.news.api.NewsService
-import com.akshay.newsapp.news.model.NewsArticles
-import com.akshay.newsapp.news.model.NewsSourceResponse
+import com.akshay.newsapp.news.storage.entity.NewsArticleDb
+import com.akshay.newsapp.news.api.NewsResponse
 import com.akshay.newsapp.news.storage.NewsArticlesDao
 import dagger.Binds
 import dagger.Module
@@ -31,27 +32,27 @@ interface NewsRepository {
      * fresh news articles from web and save into database
      * if that fails then continues showing cached data.
      */
-    fun getNewsArticles(): Flow<ViewState<List<NewsArticles>>>
+    fun getNewsArticles(): Flow<ViewState<List<NewsArticleDb>>>
 
     /**
      * Gets fresh news from web.
      */
-    suspend fun getNewsFromWebservice(): Response<NewsSourceResponse>
+    suspend fun getNewsFromWebservice(): Response<NewsResponse>
 }
 
 @Singleton
 class DefaultNewsRepository @Inject constructor(
         private val newsDao: NewsArticlesDao,
         private val newsService: NewsService
-) : NewsRepository {
+) : NewsRepository, NewsMapper {
 
-    override fun getNewsArticles(): Flow<ViewState<List<NewsArticles>>> = flow {
+    override fun getNewsArticles(): Flow<ViewState<List<NewsArticleDb>>> = flow {
         // 1. Start with loading
         emit(ViewState.loading())
 
         // 2. Try to fetch fresh news from web + cache if any
         val freshNews = getNewsFromWebservice()
-        freshNews.body()?.articles?.let(newsDao::clearAndCacheArticles)
+        freshNews.body()?.articles?.toStorage()?.let(newsDao::clearAndCacheArticles)
 
         // 3. Get news from cache [cache is always source of truth]
         val cachedNews = newsDao.getNewsArticles()
@@ -59,7 +60,7 @@ class DefaultNewsRepository @Inject constructor(
     }
     .flowOn(Dispatchers.IO)
 
-    override suspend fun getNewsFromWebservice(): Response<NewsSourceResponse> {
+    override suspend fun getNewsFromWebservice(): Response<NewsResponse> {
         return try {
             newsService.getNewsFromGoogle()
         } catch (e: Exception) {

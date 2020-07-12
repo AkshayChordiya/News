@@ -30,7 +30,7 @@ internal object NewsDatabaseMigration {
 
     object V1 {
 
-        object NewsArticles {
+        object NewsArticle {
             const val tableName = "news_article"
 
             object Column {

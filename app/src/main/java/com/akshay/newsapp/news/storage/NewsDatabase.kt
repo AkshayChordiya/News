@@ -5,10 +5,10 @@ import androidx.annotation.VisibleForTesting
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.akshay.newsapp.news.model.NewsArticles
+import com.akshay.newsapp.news.storage.entity.NewsArticleDb
 
 @Database(
-        entities = [NewsArticles::class],
+        entities = [NewsArticleDb::class],
         version = NewsDatabaseMigration.latestVersion
 )
 abstract class NewsDatabase : RoomDatabase() {

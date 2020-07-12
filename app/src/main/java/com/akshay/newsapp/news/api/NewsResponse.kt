@@ -1,12 +1,11 @@
-package com.akshay.newsapp.news.model
+package com.akshay.newsapp.news.api
 
 import com.google.gson.annotations.SerializedName
 
 /**
- * News source model describing the source details
- * and the articles under it.
+ * Describes the response from news service API.
  */
-data class NewsSourceResponse(
+data class NewsResponse(
         @SerializedName("status")
         val status: String = "",
 
@@ -17,5 +16,5 @@ data class NewsSourceResponse(
         val sortBy: String = "",
 
         @SerializedName("articles")
-        val articles: List<NewsArticles> = emptyList()
+        val articles: List<NewsArticle> = emptyList()
 )

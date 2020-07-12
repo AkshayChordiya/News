@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.akshay.newsapp.R
 import com.akshay.newsapp.core.utils.inflate
-import com.akshay.newsapp.news.model.NewsArticles
+import com.akshay.newsapp.news.storage.entity.NewsArticleDb
 import com.akshay.newsapp.news.ui.model.NewsAdapterEvent
 import kotlinx.android.synthetic.main.row_news_article.view.*
 
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.row_news_article.view.*
  */
 class NewsArticlesAdapter(
         private val listener: (NewsAdapterEvent) -> Unit
-) : ListAdapter<NewsArticles, NewsArticlesAdapter.NewsHolder>(DIFF_CALLBACK) {
+) : ListAdapter<NewsArticleDb, NewsArticlesAdapter.NewsHolder>(DIFF_CALLBACK) {
 
     /**
      * Inflate the view
@@ -37,7 +37,7 @@ class NewsArticlesAdapter(
         /**
          * Binds the UI with the data and handles clicks
          */
-        fun bind(newsArticle: NewsArticles, listener: (NewsAdapterEvent) -> Unit) = with(itemView) {
+        fun bind(newsArticle: NewsArticleDb, listener: (NewsAdapterEvent) -> Unit) = with(itemView) {
             newsTitle.text = newsArticle.title
             newsAuthor.text = newsArticle.author
             //TODO: need to format date
@@ -52,9 +52,9 @@ class NewsArticlesAdapter(
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NewsArticles>() {
-            override fun areItemsTheSame(oldItem: NewsArticles, newItem: NewsArticles): Boolean = oldItem.id == newItem.id
-            override fun areContentsTheSame(oldItem: NewsArticles, newItem: NewsArticles): Boolean = oldItem == newItem
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<NewsArticleDb>() {
+            override fun areItemsTheSame(oldItem: NewsArticleDb, newItem: NewsArticleDb): Boolean = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: NewsArticleDb, newItem: NewsArticleDb): Boolean = oldItem == newItem
         }
     }
 }
