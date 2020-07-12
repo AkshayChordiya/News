@@ -1,5 +1,3 @@
-final roomSchemaDir = "$projectDir/roomSchemas"
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -21,6 +19,14 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "NEWS_API_KEY", credentialProperty['NEWS_API_KEY'])
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                    "room.schemaLocation": "$projectDir/schemas".toString(),
+                    "room.incremental": "true"
+                ]
+            }
+        }
     }
     buildTypes {
         release {
@@ -53,9 +59,9 @@ android {
 
 kapt {
     mapDiagnosticLocations = true
-    arguments {
-        arg("room.schemaLocation", roomSchemaDir)
-    }
+//    arguments {
+//        arg("room.schemaLocation", roomSchemaDir)
+//    }
 }
 
 dependencies {
