@@ -42,8 +42,7 @@ class NewsArticlesAdapter(private val listener: (NewsAdapterEvent) -> Unit):List
         fun bind(newsArticle: NewsArticleDb, listener: (NewsAdapterEvent) -> Unit) = with(itemView) {
             newsTitle.text       = newsArticle.title
             newsAuthor.text      = newsArticle.author
-            newsPublishedAt.text = "2020-08-25T16:58:34Z".getFormattedDate().toString()
-            Log.d("date",newsArticle.publishedAt.toString())
+            newsPublishedAt.text = newsArticle.publishedAt?.getFormattedDate().toString()
             newsImage.load(newsArticle.urlToImage) {
                 placeholder(R.drawable.tools_placeholder)
                 error(R.drawable.tools_placeholder)
