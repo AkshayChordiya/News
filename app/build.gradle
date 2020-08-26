@@ -124,4 +124,8 @@ dependencies {
     // Debug
     implementation "com.jakewharton.timber:timber:$timberVersion"
     debugImplementation "com.amitshekhar.android:debug-db:$debugDbVersion"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$version_glide"
+    kapt "com.github.bumptech.glide:compiler:$version_glide_compiler"
 }

@@ -9,4 +9,5 @@
 
     <!-- Empty -->
     <string name="no_news">No News</string>
+    <string name="news_image_description">news_image_description</string>
 </resources>

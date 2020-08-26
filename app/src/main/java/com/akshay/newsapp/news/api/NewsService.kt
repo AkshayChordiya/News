@@ -16,7 +16,7 @@ interface NewsService {
      *
      * See [article documentation](https://newsapi.org/docs/v1#apiArticles).
      */
-    @GET("top-headlines?apiKey=${BuildConfig.NEWS_API_KEY}")
+    @GET("articles?source=the-verge&apiKey=${BuildConfig.NEWS_API_KEY}")
     suspend fun getNewsFromGoogle(): Response<NewsResponse>
 
 }

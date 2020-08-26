@@ -1,6 +1,7 @@
 package com.akshay.newsapp.news.ui.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.akshay.newsapp.R
@@ -8,6 +9,7 @@ import com.akshay.newsapp.core.ui.ViewState
 import com.akshay.newsapp.core.ui.base.BaseActivity
 import com.akshay.newsapp.core.utils.observeNotNull
 import com.akshay.newsapp.core.utils.toast
+import com.akshay.newsapp.news.storage.entity.NewsArticleDb
 import com.akshay.newsapp.news.ui.adapter.NewsArticlesAdapter
 import com.akshay.newsapp.news.ui.viewmodel.NewsArticleViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,6 +33,7 @@ class NewsActivity : BaseActivity() {
         newsList.setProgressView(progress_view)
 
         val adapter = NewsArticlesAdapter { toast("Clicked on item") }
+
         newsList.adapter = adapter
         newsList.layoutManager = LinearLayoutManager(this)
 
@@ -42,6 +45,6 @@ class NewsActivity : BaseActivity() {
                 is ViewState.Error -> toast("Something went wrong ¯\\_(ツ)_/¯ => ${state.message}")
             }
         }
-
     }
+
 }
