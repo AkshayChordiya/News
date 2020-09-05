@@ -22,10 +22,10 @@ class NewsSourceServiceTest : BaseServiceTest() {
     @Throws(IOException::class)
     fun createService() {
         service = Retrofit.Builder()
-                .baseUrl(mockWebServer.url("/"))
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create()
+            .baseUrl(mockWebServer.url("/"))
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create()
     }
 
     @Test
@@ -52,5 +52,6 @@ class NewsSourceServiceTest : BaseServiceTest() {
         assertThat(article1.author, `is`("Akshay"))
         assertThat(article1.title, `is`("Google Pixel 2"))
         assertThat(article1.description, `is`("Gift me Google Pixel 2 ;)"))
+        assertThat(article1.source.name, `is`("CNN"))
     }
 }
