@@ -32,19 +32,18 @@ class NewsSourceServiceTest : BaseServiceTest() {
     @Throws(IOException::class, InterruptedException::class)
     fun getNewsSource() = runBlocking {
         enqueueResponse("news_source.json")
-        val newsSource = service.getNewsFromGoogle().body() ?: return@runBlocking
+        val response = service.getTopHeadlines().body() ?: return@runBlocking
 
         // Dummy request
         mockWebServer.takeRequest()
 
         // Check news source
-        assertThat(newsSource, notNullValue())
-        assertThat(newsSource.source, `is`("google-news"))
-        assertThat(newsSource.sortBy, `is`("top"))
-        assertThat(newsSource.status, `is`("ok"))
+        assertThat(response, notNullValue())
+        assertThat(response.totalResults, `is`(74))
+        assertThat(response.status, `is`("ok"))
 
         // Check list
-        val articles = newsSource.articles
+        val articles = response.articles
         assertThat(articles, notNullValue())
 
         // Check item 1

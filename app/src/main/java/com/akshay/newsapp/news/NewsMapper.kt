@@ -12,7 +12,9 @@ interface NewsMapper : Mapper<NewsArticleDb, NewsArticle> {
             description = description,
             url = url,
             urlToImage = urlToImage,
-            publishedAt = publishedAt
+            publishedAt = publishedAt,
+            content = content,
+            source = NewsArticle.Source(source.id, source.name)
         )
     }
 
@@ -23,7 +25,9 @@ interface NewsMapper : Mapper<NewsArticleDb, NewsArticle> {
             description = description,
             url = url,
             urlToImage = urlToImage,
-            publishedAt = publishedAt
+            publishedAt = publishedAt,
+            content = content,
+            source = NewsArticleDb.Source(source.id, source.name)
         )
     }
 }

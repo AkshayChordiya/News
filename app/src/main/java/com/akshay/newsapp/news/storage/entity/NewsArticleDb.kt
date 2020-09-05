@@ -1,6 +1,7 @@
 package com.akshay.newsapp.news.storage.entity
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.akshay.newsapp.news.storage.entity.NewsArticleDb.NewsArticles.Column
@@ -52,8 +53,23 @@ data class NewsArticleDb(
          * Date-time when the article was published
          */
         @ColumnInfo(name = Column.publishedAt)
-        val publishedAt: String? = null
+        val publishedAt: String? = null,
+
+        @Embedded(prefix = "source_")
+        val source: Source,
+
+        @ColumnInfo(name = Column.content)
+        val content: String? = null
 ) {
+
+    data class Source(
+        @ColumnInfo(name = Column.sourceId)
+        val id: String? = null,
+
+        @ColumnInfo(name = Column.sourceName)
+        val name: String? = null
+    )
+
     object NewsArticles {
         const val tableName = "news_article"
 
@@ -65,6 +81,10 @@ data class NewsArticleDb(
             const val url = "url"
             const val urlToImage = "urlToImage"
             const val publishedAt = "publishedAt"
+            const val content = "content"
+
+            const val sourceId = "id"
+            const val sourceName = "name"
         }
     }
 }

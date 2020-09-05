@@ -39,7 +39,7 @@ class NewsRepositoryTest : MockitoTest() {
         val response = Response.success(newsSource)
 
         // WHEN
-        whenever(newsSourceService.getNewsFromGoogle()) doReturn response
+        whenever(newsSourceService.getTopHeadlines()) doReturn response
         whenever(newsDao.getNewsArticles()) doReturn flowOf(cachedArticles)
 
         // THEN
@@ -56,7 +56,7 @@ class NewsRepositoryTest : MockitoTest() {
         val error = RuntimeException("Unable to fetch from network")
 
         // WHEN
-        whenever(newsSourceService.getNewsFromGoogle()) doThrow error
+        whenever(newsSourceService.getTopHeadlines()) doThrow error
         whenever(newsDao.getNewsArticles()) doReturn flowOf(cachedArticles)
 
         // THEN

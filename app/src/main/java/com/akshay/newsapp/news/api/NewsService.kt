@@ -7,16 +7,16 @@ import retrofit2.http.GET
 /**
  * Describes endpoints to fetch the news from NewsAPI.
  *
- * Read the documentation [here](https://newsapi.org/docs/v1)
+ * Read the documentation [here](https://newsapi.org/docs/v2)
  */
 interface NewsService {
 
     /**
-     * Retrieves all the latest news article from Google news using News API.
+     * Get top headlines.
      *
-     * See [article documentation](https://newsapi.org/docs/v1#apiArticles).
+     * See [article documentation](https://newsapi.org/docs/endpoints/top-headlines).
      */
-    @GET("top-headlines?apiKey=${BuildConfig.NEWS_API_KEY}")
-    suspend fun getNewsFromGoogle(): Response<NewsResponse>
+    @GET("top-headlines?apiKey=${BuildConfig.NEWS_API_KEY}&category=technology")
+    suspend fun getTopHeadlines(): Response<NewsResponse>
 
 }
