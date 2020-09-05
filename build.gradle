@@ -26,6 +26,7 @@ buildscript {
     // Networking
     ext.retrofitVersion = '2.7.1'
     ext.okHttpVersion = '4.3.1'
+    ext.curlVersion = '0.6.0'
 
     // Coil
     ext.coilVersion = "0.11.0"
