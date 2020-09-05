@@ -49,7 +49,6 @@ buildscript {
 
     // Debug
     ext.timberVersion = '4.7.1'
-    ext.debugDbVersion = '1.0.6'
 
     repositories {
         google()
