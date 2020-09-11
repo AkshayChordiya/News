@@ -32,7 +32,6 @@ class NewsActivity : BaseActivity() {
 
         val adapter = NewsArticlesAdapter { toast("Clicked on item") }
         newsList.adapter = adapter
-        newsList.layoutManager = LinearLayoutManager(this)
 
         // Update the UI on state change
         newsArticleViewModel.getNewsArticles().observeNotNull(this) { state ->

@@ -1,60 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/NewsArticle.View"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="@dimen/card_elevation">
+    app:layoutDescription="@xml/row_news_article_scene">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        style="@style/NewsArticle.View"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/drawable_list_item">
+        app:cardElevation="@dimen/card_elevation"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <!-- News block -->
         <RelativeLayout
-            android:id="@+id/newsImageView"
+            android:id="@+id/rootLayout"
             android:layout_width="match_parent"
-            android:layout_height="180sp">
+            android:layout_height="wrap_content"
+            android:background="@drawable/drawable_list_item">
 
-            <ImageView
-                android:id="@+id/newsImage"
-                style="@style/NewsArticle.Image"
+            <!-- News block -->
+            <RelativeLayout
+                android:id="@+id/newsImageView"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/image_size"
-                android:contentDescription="@string/news_image"
-                tools:src="@drawable/tools_placeholder" />
+                android:layout_height="180sp">
 
+                <ImageView
+                    android:id="@+id/newsImage"
+                    style="@style/NewsArticle.Image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_size"
+                    android:contentDescription="@string/news_image"
+                    tools:src="@drawable/tools_placeholder" />
+
+                <TextView
+                    android:id="@+id/newsAuthor"
+                    style="@style/NewsArticle.Author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    tools:text="ABC News" />
+
+            </RelativeLayout>
+
+            <!-- News Title -->
             <TextView
-                android:id="@+id/newsAuthor"
-                style="@style/NewsArticle.Author"
+                android:id="@+id/newsTitle"
+                style="@style/NewsArticle.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                tools:text="ABC News" />
+                android:layout_below="@+id/newsImageView"
+                tools:text="Elon Musk says Tesla can't yet launch in India" />
+
+            <!-- Publish at -->
+            <TextView
+                android:id="@+id/newsPublishedAt"
+                style="@style/NewsArticle.PublishedAt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/newsTitle"
+                android:layout_marginStart="@dimen/normal_padding"
+                android:layout_marginLeft="@dimen/normal_padding"
+                tools:text="@string/str_test_date" />
 
         </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
-        <!-- News Title -->
-        <TextView
-            android:id="@+id/newsTitle"
-            style="@style/NewsArticle.Title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/newsImageView"
-            tools:text="Elon Musk says Tesla can't yet launch in India" />
-
-        <!-- Publish at -->
-        <TextView
-            android:id="@+id/newsPublishedAt"
-            style="@style/NewsArticle.PublishedAt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/newsTitle"
-            android:layout_marginStart="@dimen/normal_padding"
-            android:layout_marginLeft="@dimen/normal_padding"
-            tools:text="@string/str_test_date" />
-
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.motion.widget.MotionLayout>
