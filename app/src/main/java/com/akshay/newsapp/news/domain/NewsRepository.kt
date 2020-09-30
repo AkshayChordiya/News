@@ -3,10 +3,10 @@ package com.akshay.newsapp.news.domain
 import com.akshay.newsapp.core.ui.ViewState
 import com.akshay.newsapp.core.utils.httpError
 import com.akshay.newsapp.news.NewsMapper
-import com.akshay.newsapp.news.api.NewsService
-import com.akshay.newsapp.news.storage.entity.NewsArticleDb
 import com.akshay.newsapp.news.api.NewsResponse
+import com.akshay.newsapp.news.api.NewsService
 import com.akshay.newsapp.news.storage.NewsArticlesDao
+import com.akshay.newsapp.news.storage.entity.NewsArticleDb
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -42,8 +42,8 @@ interface NewsRepository {
 
 @Singleton
 class DefaultNewsRepository @Inject constructor(
-        private val newsDao: NewsArticlesDao,
-        private val newsService: NewsService
+    private val newsDao: NewsArticlesDao,
+    private val newsService: NewsService
 ) : NewsRepository, NewsMapper {
 
     override fun getNewsArticles(): Flow<ViewState<List<NewsArticleDb>>> = flow {
@@ -58,11 +58,11 @@ class DefaultNewsRepository @Inject constructor(
         val cachedNews = newsDao.getNewsArticles()
         emitAll(cachedNews.map { ViewState.success(it) })
     }
-    .flowOn(Dispatchers.IO)
+        .flowOn(Dispatchers.IO)
 
     override suspend fun getNewsFromWebservice(): Response<NewsResponse> {
         return try {
-            newsService.getNewsFromGoogle()
+            newsService.getTopHeadlines()
         } catch (e: Exception) {
             httpError(404)
         }
@@ -73,5 +73,6 @@ class DefaultNewsRepository @Inject constructor(
 @InstallIn(ApplicationComponent::class)
 interface NewsRepositoryModule {
     /* Exposes the concrete implementation for the interface */
-    @Binds fun it(it: DefaultNewsRepository): NewsRepository
+    @Binds
+    fun it(it: DefaultNewsRepository): NewsRepository
 }

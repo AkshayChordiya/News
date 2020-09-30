@@ -1,9 +1,12 @@
 {
   "status": "ok",
-  "source": "google-news",
-  "sortBy": "top",
+  "totalResults": 74,
   "articles": [
     {
+      "source": {
+        "id": null,
+        "name": "CNN"
+      },
       "author": "Akshay",
       "title": "Google Pixel 2",
       "description": "Gift me Google Pixel 2 ;)",
