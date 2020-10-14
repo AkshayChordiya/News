@@ -50,6 +50,11 @@ buildscript {
     // Debug
     ext.timberVersion = '4.7.1'
 
+    //Glide
+    ext.version_glide = '4.11.0'
+    ext.version_glide_compiler = '4.11.0'
+
+
     repositories {
         google()
         jcenter()

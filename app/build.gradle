@@ -124,4 +124,6 @@ dependencies {
 
     // Debug
     implementation "com.jakewharton.timber:timber:$timberVersion"
+    debugImplementation "com.amitshekhar.android:debug-db:$debugDbVersion"
+
 }
