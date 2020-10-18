@@ -7,15 +7,18 @@ buildscript {
     ext.androidCompileSdkVersion = 30
 
     // Kotlin
-    ext.kotlinVersion = '1.4.0'
+    ext.kotlinVersion = '1.4.10'
     ext.coroutinesVersion = '1.3.9'
     ext.ankoVersion = '0.10.4'
 
     // KTX
     ext.liveDataKtx = '2.2.0'
 
+    // Jetpack Compose
+    ext.composeVersion = "1.0.0-alpha05"
+
     // Android library
-    ext.androidGradlePlugin = '4.0.0'
+    ext.androidGradlePlugin = '4.2.0-alpha14'
     ext.supportVersion = '1.2.0'
     ext.recyclerViewVersion = '1.1.0'
     ext.cardViewVersion = '1.0.0'
@@ -70,11 +73,6 @@ allprojects {
         jcenter()
         google()
         mavenCentral()
-    }
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-        kotlinOptions {
-            jvmTarget = "1.8"
-        }
     }
 }
 

@@ -55,6 +55,19 @@ android {
         exclude "**.kotlin_builtins"
         exclude "**.kotlin_module"
     }
+
+    buildFeatures {
+        compose true
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    composeOptions {
+        kotlinCompilerVersion kotlinVersion
+        kotlinCompilerExtensionVersion composeVersion
+    }
 }
 
 kapt {
@@ -109,6 +122,13 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltViewModelVersion"
     kapt "androidx.hilt:hilt-compiler:$hiltViewModelVersion"
 
+    // Jetpack Compose
+    implementation "androidx.compose.runtime:runtime:$composeVersion"
+    implementation "androidx.compose.ui:ui:$composeVersion"
+    implementation "androidx.ui:ui-tooling:$composeVersion"
+    implementation "androidx.compose.foundation:foundation:$composeVersion"
+    implementation "androidx.compose.material:material:$composeVersion"
+
     // KTX
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
@@ -124,4 +144,16 @@ dependencies {
 
     // Debug
     implementation "com.jakewharton.timber:timber:$timberVersion"
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
+        // Enable experimental coroutines APIs, including Flow
+        freeCompilerArgs += '-Xopt-in=kotlin.Experimental'
+        freeCompilerArgs += '-Xallow-jvm-ir-dependencies'
+
+        // Set JVM target to 1.8
+        jvmTarget = "1.8"
+    }
 }
