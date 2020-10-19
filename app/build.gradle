@@ -83,10 +83,15 @@ dependencies {
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
     implementation "com.github.mrmike:ok2curl:$curlVersion"
     testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
+
+    // Moshi
+    implementation "com.squareup.moshi:moshi:$moshiVersion"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+
 
     // Lifecycle (ViewModel + LiveData)
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
