@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.akshay.newsapp.R
 import com.akshay.newsapp.core.utils.inflate
+import com.akshay.newsapp.databinding.RowNewsArticleBinding
 import com.akshay.newsapp.news.storage.entity.NewsArticleDb
 import com.akshay.newsapp.news.ui.model.NewsAdapterEvent
-import kotlinx.android.synthetic.main.row_news_article.view.*
 
 /**
  * The News adapter to show the news in a list.
@@ -34,16 +34,18 @@ class NewsArticlesAdapter(
      */
     class NewsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private val binding = RowNewsArticleBinding.bind(itemView)
+
         /**
          * Binds the UI with the data and handles clicks
          */
         fun bind(newsArticle: NewsArticleDb, listener: (NewsAdapterEvent) -> Unit) = with(itemView) {
-            newsTitle.text = newsArticle.title
-            newsAuthor.text = newsArticle.author
+            binding.newsTitle.text = newsArticle.title
+            binding.newsAuthor.text = newsArticle.author
             //TODO: need to format date
             //tvListItemDateTime.text = getFormattedDate(newsArticle.publishedAt)
-            newsPublishedAt.text = newsArticle.publishedAt
-            newsImage.load(newsArticle.urlToImage) {
+            binding.newsPublishedAt.text = newsArticle.publishedAt
+            binding.newsImage.load(newsArticle.urlToImage) {
                 placeholder(R.drawable.tools_placeholder)
                 error(R.drawable.tools_placeholder)
             }
