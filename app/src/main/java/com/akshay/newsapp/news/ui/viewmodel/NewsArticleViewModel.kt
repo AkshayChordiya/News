@@ -12,7 +12,7 @@ import com.akshay.newsapp.news.storage.entity.NewsArticleDb
  * A container for [NewsArticleDb] related data to show on the UI.
  */
 class NewsArticleViewModel @ViewModelInject constructor(
-        newsRepository: NewsRepository
+        private val newsRepository: NewsRepository
 ) : ViewModel() {
 
     private val newsArticleDb: LiveData<ViewState<List<NewsArticleDb>>> = newsRepository.getNewsArticles().asLiveData()
@@ -21,4 +21,9 @@ class NewsArticleViewModel @ViewModelInject constructor(
      * Return news articles to observeNotNull on the UI.
      */
     fun getNewsArticles(): LiveData<ViewState<List<NewsArticleDb>>> = newsArticleDb
+
+    /**
+     * Return news article for given articleId
+     */
+    fun getNewsArticle(articleId: Int): LiveData<ViewState<NewsArticleDb>> = newsRepository.getNewsArticle(articleId).asLiveData()
 }

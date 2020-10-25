@@ -29,6 +29,12 @@ interface NewsArticlesDao {
     }
 
     /**
+     *  Get News article for given articleId
+     */
+    @Query("SELECT * FROM news_article WHERE id = :articleId")
+    fun getNewsArticle(articleId: Int): Flow<NewsArticleDb>
+
+    /**
      * Get all the articles from table
      */
     @Query("SELECT * FROM news_article")
