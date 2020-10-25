@@ -1,5 +1,6 @@
 package com.akshay.newsapp.news.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +10,7 @@ import com.akshay.newsapp.core.utils.observeNotNull
 import com.akshay.newsapp.core.utils.toast
 import com.akshay.newsapp.databinding.ActivityMainBinding
 import com.akshay.newsapp.news.ui.adapter.NewsArticlesAdapter
+import com.akshay.newsapp.news.ui.model.NewsAdapterEvent
 import com.akshay.newsapp.news.ui.viewmodel.NewsArticleViewModel
 
 
@@ -30,7 +32,15 @@ class NewsActivity : BaseActivity() {
         binding.newsList.setEmptyView(binding.emptyLayout.emptyView)
         binding.newsList.setProgressView(binding.progressLayout.progressView)
 
-        val adapter = NewsArticlesAdapter { toast("Clicked on item") }
+        val adapter = NewsArticlesAdapter {
+            when (it) {
+             is NewsAdapterEvent.ClickEvent -> {
+                 val intent = Intent(this, NewsDetailsActivity::class.java)
+                 intent.putExtra(NEWS_ARG_ARTICLE_ID, it.newsArticle.id)
+                 startActivity(intent)
+             }
+            }
+        }
         binding.newsList.adapter = adapter
         binding.newsList.layoutManager = LinearLayoutManager(this)
 

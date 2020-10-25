@@ -116,6 +116,7 @@ dependencies {
 
     // Coil
     implementation "io.coil-kt:coil:$coilVersion"
+    implementation "dev.chrisbanes.accompanist:accompanist-coil:0.3.1"
 
     // Hilt + Dagger
     implementation "com.google.dagger:hilt-android:$hiltAndroidVersion"
@@ -129,6 +130,7 @@ dependencies {
     implementation "androidx.ui:ui-tooling:$composeVersion"
     implementation "androidx.compose.foundation:foundation:$composeVersion"
     implementation "androidx.compose.material:material:$composeVersion"
+    implementation "androidx.compose.runtime:runtime-livedata:$composeVersion"
 
     // KTX
     implementation "androidx.core:core-ktx:$coreKtxVersion"
