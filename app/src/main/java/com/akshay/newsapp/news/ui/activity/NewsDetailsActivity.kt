@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
+import androidx.ui.tooling.preview.Preview
 import com.akshay.newsapp.R
 import com.akshay.newsapp.core.ui.ViewState
 import com.akshay.newsapp.core.ui.base.BaseActivity
@@ -60,18 +61,10 @@ fun newsDetailsScreen(newsArticleViewModel: NewsArticleViewModel, newsId: Int) {
     val viewState by newsArticleViewModel.getNewsArticle(articleId = newsId).observeAsState(ViewState.loading())
     when (viewState) {
         is ViewState.Loading -> {
-            Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally) {
-                CircularProgressIndicator()
-            }
+            loadingIndicator()
         }
         is ViewState.Error -> {
-            Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = (viewState as ViewState.Error<NewsArticleDb>).message, style = MaterialTheme.typography.body1)
-            }
+            errorView((viewState as ViewState.Error<NewsArticleDb>).message)
         }
         is ViewState.Success -> {
             ScrollableColumn(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -91,4 +84,29 @@ fun newsDetailsScreen(newsArticleViewModel: NewsArticleViewModel, newsId: Int) {
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun loadingIndicator() {
+    Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+        CircularProgressIndicator()
+    }
+}
+
+@Composable
+fun errorView(message: String) {
+    Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = message, style = MaterialTheme.typography.body1)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun errorViewPreview() {
+    errorView(message = "Something went wrong!")
 }
