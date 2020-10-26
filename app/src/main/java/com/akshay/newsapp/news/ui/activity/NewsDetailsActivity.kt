@@ -6,15 +6,13 @@ import androidx.compose.foundation.Icon
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.setContent
@@ -41,7 +39,6 @@ class NewsDetailsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NewsTheme {
-                // A surface container using the 'background' color from the theme
                 Scaffold(topBar = {
                     TopAppBar(
                             title = {},
@@ -60,11 +57,21 @@ class NewsDetailsActivity : BaseActivity() {
 
 @Composable
 fun newsDetailsScreen(newsArticleViewModel: NewsArticleViewModel, newsId: Int) {
-    val viewState: ViewState<NewsArticleDb> by newsArticleViewModel.getNewsArticle(articleId = newsId).observeAsState(ViewState.loading())
+    val viewState by newsArticleViewModel.getNewsArticle(articleId = newsId).observeAsState(ViewState.loading())
     when (viewState) {
         is ViewState.Loading -> {
+            Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally) {
+                CircularProgressIndicator()
+            }
         }
         is ViewState.Error -> {
+            Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = (viewState as ViewState.Error<NewsArticleDb>).message, style = MaterialTheme.typography.body1)
+            }
         }
         is ViewState.Success -> {
             ScrollableColumn(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -77,7 +84,7 @@ fun newsDetailsScreen(newsArticleViewModel: NewsArticleViewModel, newsId: Int) {
                                     .clip(shape = MaterialTheme.shapes.medium)
                     )
                     Spacer(Modifier.preferredHeight(16.dp))
-                    Text(text = title ?: "", style = MaterialTheme.typography.h5)
+                    Text(text = title ?: "", style = MaterialTheme.typography.h6)
                     Spacer(Modifier.preferredHeight(8.dp))
                     Text(text = content ?: "", style = MaterialTheme.typography.body1)
                 }
