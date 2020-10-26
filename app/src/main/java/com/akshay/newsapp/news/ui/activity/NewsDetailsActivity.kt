@@ -92,7 +92,11 @@ fun loadingIndicator() {
     Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-        CircularProgressIndicator()
+        CircularProgressIndicator(
+                color = MaterialTheme.colors.secondary,
+                strokeWidth = 6.dp,
+                modifier = Modifier.preferredSize(64.dp)
+        )
     }
 }
 
