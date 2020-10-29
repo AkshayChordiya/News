@@ -29,8 +29,7 @@ interface NewsRepository {
 
     /**
      * Gets the particular article from database for
-     * the give articleId
-     * @param articleId id from NewsArticleDb
+     * the given [articleId]
      */
     fun getNewsArticle(articleId: Int): Flow<ViewState<NewsArticleDb>>
 
