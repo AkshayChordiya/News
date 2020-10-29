@@ -70,16 +70,23 @@ fun newsDetailsScreen(newsArticleViewModel: NewsArticleViewModel, newsId: Int) {
             ScrollableColumn(modifier = Modifier.padding(horizontal = 16.dp)) {
                 with((viewState as ViewState.Success<NewsArticleDb>).data) {
                     Spacer(modifier = Modifier.preferredHeight(8.dp))
-                    CoilImage(data = urlToImage ?: R.drawable.tools_placeholder,
+                    CoilImage(
+                            data = urlToImage ?: R.drawable.tools_placeholder,
                             modifier = Modifier
                                     .heightIn(min = 180.dp)
                                     .fillMaxWidth()
                                     .clip(shape = MaterialTheme.shapes.medium)
                     )
                     Spacer(Modifier.preferredHeight(16.dp))
-                    Text(text = title ?: "", style = MaterialTheme.typography.h6)
+                    Text(
+                            text = title ?: "",
+                            style = MaterialTheme.typography.h6
+                    )
                     Spacer(Modifier.preferredHeight(8.dp))
-                    Text(text = content ?: "", style = MaterialTheme.typography.body1)
+                    Text(
+                            text = content ?: "",
+                            style = MaterialTheme.typography.body1
+                    )
                 }
             }
         }
@@ -89,9 +96,11 @@ fun newsDetailsScreen(newsArticleViewModel: NewsArticleViewModel, newsId: Int) {
 @Preview(showBackground = true)
 @Composable
 fun loadingIndicator() {
-    Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+    Column(
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally) {
+            horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         CircularProgressIndicator(
                 color = MaterialTheme.colors.secondary,
                 strokeWidth = 6.dp,
@@ -102,10 +111,15 @@ fun loadingIndicator() {
 
 @Composable
 fun errorView(message: String) {
-    Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+    Column(
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = message, style = MaterialTheme.typography.body1)
+            horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+                text = message,
+                style = MaterialTheme.typography.body1
+        )
     }
 }
 
