@@ -56,7 +56,7 @@ class DefaultNewsRepository @Inject constructor(
         // 1. Start with loading
         emit(ViewState.loading())
 
-        // 2. Fetch and update state particular article from database
+        // 2. Fetch the news article
         val article = newsDao.getNewsArticle(articleId = articleId)
         emitAll(article.map { ViewState.success(it) })
     }.flowOn(Dispatchers.IO)
