@@ -23,10 +23,12 @@
 
     <!-- Progress and empty views -->
     <include
+        android:id="@+id/progressLayout"
         layout="@layout/progress_layout"
         tools:visibility="invisible" />
 
     <include
+        android:id="@+id/emptyLayout"
         layout="@layout/empty_layout"
         tools:visibility="invisible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

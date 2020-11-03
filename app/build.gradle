@@ -55,6 +55,10 @@ android {
         exclude "**.kotlin_builtins"
         exclude "**.kotlin_module"
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 kapt {

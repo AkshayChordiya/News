@@ -3,42 +3,42 @@ package com.akshay.newsapp.news.ui.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.akshay.newsapp.R
 import com.akshay.newsapp.core.ui.ViewState
 import com.akshay.newsapp.core.ui.base.BaseActivity
 import com.akshay.newsapp.core.utils.observeNotNull
 import com.akshay.newsapp.core.utils.toast
+import com.akshay.newsapp.databinding.ActivityMainBinding
 import com.akshay.newsapp.news.ui.adapter.NewsArticlesAdapter
 import com.akshay.newsapp.news.ui.viewmodel.NewsArticleViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.empty_layout.*
-import kotlinx.android.synthetic.main.progress_layout.*
 
 
 class NewsActivity : BaseActivity() {
 
     private val newsArticleViewModel: NewsArticleViewModel by viewModels()
 
+    private lateinit var binding: ActivityMainBinding
+
     /**
      * Starting point of the activity
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Setting up RecyclerView and adapter
-        newsList.setEmptyView(empty_view)
-        newsList.setProgressView(progress_view)
+        binding.newsList.setEmptyView(binding.emptyLayout.emptyView)
+        binding.newsList.setProgressView(binding.progressLayout.progressView)
 
         val adapter = NewsArticlesAdapter { toast("Clicked on item") }
-        newsList.adapter = adapter
-        newsList.layoutManager = LinearLayoutManager(this)
+        binding.newsList.adapter = adapter
+        binding.newsList.layoutManager = LinearLayoutManager(this)
 
         // Update the UI on state change
         newsArticleViewModel.getNewsArticles().observeNotNull(this) { state ->
             when (state) {
                 is ViewState.Success -> adapter.submitList(state.data)
-                is ViewState.Loading -> newsList.showLoading()
+                is ViewState.Loading -> binding.newsList.showLoading()
                 is ViewState.Error -> toast("Something went wrong ¯\\_(ツ)_/¯ => ${state.message}")
             }
         }
