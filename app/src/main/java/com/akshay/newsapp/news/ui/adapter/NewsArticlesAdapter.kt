@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import com.akshay.newsapp.R
 import com.akshay.newsapp.core.utils.inflate
 import com.akshay.newsapp.databinding.RowNewsArticleBinding
@@ -49,7 +49,7 @@ class NewsArticlesAdapter(
                 placeholder(R.drawable.tools_placeholder)
                 error(R.drawable.tools_placeholder)
             }
-            setOnClickListener { listener(NewsAdapterEvent.ClickEvent) }
+            setOnClickListener { listener(NewsAdapterEvent.ClickEvent(newsArticle = newsArticle)) }
         }
     }
 

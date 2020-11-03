@@ -58,6 +58,16 @@ android {
 
     buildFeatures {
         viewBinding true
+        compose true
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    composeOptions {
+        kotlinCompilerVersion kotlinVersion
+        kotlinCompilerExtensionVersion composeVersion
     }
 }
 
@@ -106,12 +116,21 @@ dependencies {
 
     // Coil
     implementation "io.coil-kt:coil:$coilVersion"
+    implementation "dev.chrisbanes.accompanist:accompanist-coil:$accompanistCoilVersion"
 
     // Hilt + Dagger
     implementation "com.google.dagger:hilt-android:$hiltAndroidVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltAndroidVersion"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltViewModelVersion"
     kapt "androidx.hilt:hilt-compiler:$hiltViewModelVersion"
+
+    // Jetpack Compose
+    implementation "androidx.compose.runtime:runtime:$composeVersion"
+    implementation "androidx.compose.ui:ui:$composeVersion"
+    implementation "androidx.ui:ui-tooling:$composeVersion"
+    implementation "androidx.compose.foundation:foundation:$composeVersion"
+    implementation "androidx.compose.material:material:$composeVersion"
+    implementation "androidx.compose.runtime:runtime-livedata:$composeVersion"
 
     // KTX
     implementation "androidx.core:core-ktx:$coreKtxVersion"
@@ -128,4 +147,16 @@ dependencies {
 
     // Debug
     implementation "com.jakewharton.timber:timber:$timberVersion"
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
+        // Enable experimental coroutines APIs, including Flow
+        freeCompilerArgs += '-Xopt-in=kotlin.Experimental'
+        freeCompilerArgs += '-Xallow-jvm-ir-dependencies'
+
+        // Set JVM target to 1.8
+        jvmTarget = "1.8"
+    }
 }

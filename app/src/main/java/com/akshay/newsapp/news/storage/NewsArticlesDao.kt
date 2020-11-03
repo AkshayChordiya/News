@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import com.akshay.newsapp.news.storage.NewsDatabaseMigration.V2.NewsArticle
 import com.akshay.newsapp.news.storage.entity.NewsArticleDb
 import kotlinx.coroutines.flow.Flow
 
@@ -27,6 +28,12 @@ interface NewsArticlesDao {
         clearAllArticles()
         insertArticles(articles)
     }
+
+    /**
+     *  Get news article for the specified [articleId]
+     */
+    @Query("SELECT * FROM ${NewsArticle.tableName} WHERE id = :articleId")
+    fun getNewsArticle(articleId: Int): Flow<NewsArticleDb>
 
     /**
      * Get all the articles from table

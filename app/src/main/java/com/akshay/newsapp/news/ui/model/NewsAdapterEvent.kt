@@ -1,5 +1,6 @@
 package com.akshay.newsapp.news.ui.model
 
+import com.akshay.newsapp.news.storage.entity.NewsArticleDb
 import com.akshay.newsapp.news.ui.adapter.NewsArticlesAdapter
 
 /**
@@ -9,5 +10,5 @@ import com.akshay.newsapp.news.ui.adapter.NewsArticlesAdapter
 sealed class NewsAdapterEvent {
 
     /* Describes item click event  */
-    object ClickEvent : NewsAdapterEvent()
+    data class ClickEvent(val newsArticle: NewsArticleDb) : NewsAdapterEvent()
 }

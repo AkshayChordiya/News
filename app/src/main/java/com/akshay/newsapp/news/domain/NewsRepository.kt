@@ -28,6 +28,12 @@ import javax.inject.Singleton
 interface NewsRepository {
 
     /**
+     * Gets the particular article from database for
+     * the given [articleId]
+     */
+    fun getNewsArticle(articleId: Int): Flow<ViewState<NewsArticleDb>>
+
+    /**
      * Gets tne cached news article from database and tries to get
      * fresh news articles from web and save into database
      * if that fails then continues showing cached data.
@@ -45,6 +51,15 @@ class DefaultNewsRepository @Inject constructor(
     private val newsDao: NewsArticlesDao,
     private val newsService: NewsService
 ) : NewsRepository, NewsMapper {
+
+    override fun getNewsArticle(articleId: Int): Flow<ViewState<NewsArticleDb>> = flow {
+        // 1. Start with loading
+        emit(ViewState.loading())
+
+        // 2. Fetch the news article
+        val article = newsDao.getNewsArticle(articleId = articleId)
+        emitAll(article.map { ViewState.success(it) })
+    }.flowOn(Dispatchers.IO)
 
     override fun getNewsArticles(): Flow<ViewState<List<NewsArticleDb>>> = flow {
         // 1. Start with loading
