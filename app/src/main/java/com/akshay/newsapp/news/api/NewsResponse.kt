@@ -1,17 +1,17 @@
 package com.akshay.newsapp.news.api
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 /**
  * Describes the response from news service API.
  */
 data class NewsResponse(
-    @SerializedName("status")
+    @Json(name = "status")
     val status: String = "",
 
-    @SerializedName("totalResults")
+    @Json(name = "totalResults")
     val totalResults: Int = 0,
 
-    @SerializedName("articles")
+    @Json(name = "articles")
     val articles: List<NewsArticle> = emptyList()
 )

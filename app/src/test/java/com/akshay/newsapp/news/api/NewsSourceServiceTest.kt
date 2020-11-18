@@ -1,5 +1,6 @@
 package com.akshay.newsapp.news.api
 
+import com.akshay.newsapp.core.di.NetworkModule.provideMoshi
 import com.akshay.newsapp.core.utils.create
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
@@ -10,8 +11,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.IOException
+import kotlin.jvm.Throws
 
 @RunWith(JUnit4::class)
 class NewsSourceServiceTest : BaseServiceTest() {
@@ -23,7 +25,7 @@ class NewsSourceServiceTest : BaseServiceTest() {
     fun createService() {
         service = Retrofit.Builder()
             .baseUrl(mockWebServer.url("/"))
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(provideMoshi()))
             .build()
             .create()
     }

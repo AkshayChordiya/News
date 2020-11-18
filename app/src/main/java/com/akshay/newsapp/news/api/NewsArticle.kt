@@ -1,57 +1,56 @@
 package com.akshay.newsapp.news.api
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class NewsArticle(
-
-    @SerializedName("source")
+    @Json(name = "source")
     val source: Source,
 
     /**
      * Name of the author for the article
      */
-    @SerializedName("author")
+    @Json(name = "author")
     val author: String? = null,
 
     /**
      * Title of the article
      */
-    @SerializedName("title")
+    @Json(name = "title")
     val title: String? = null,
 
     /**
      * Complete description of the article
      */
-    @SerializedName("description")
+    @Json(name = "description")
     val description: String? = null,
 
     /**
      * URL to the article
      */
-    @SerializedName("url")
+    @Json(name = "url")
     val url: String? = null,
 
     /**
      * URL of the artwork shown with article
      */
-    @SerializedName("urlToImage")
+    @Json(name = "urlToImage")
     val urlToImage: String? = null,
 
     /**
      * Date-time when the article was published
      */
-    @SerializedName("publishedAt")
+    @Json(name = "publishedAt")
     val publishedAt: String? = null,
 
-    @SerializedName("content")
+    @Json(name = "content")
     val content: String? = null
 ) {
     data class Source(
 
-        @SerializedName("id")
+        @Json(name = "id")
         val id: String? = null,
 
-        @SerializedName("name")
+        @Json(name = "name")
         val name: String? = null
     )
 }
